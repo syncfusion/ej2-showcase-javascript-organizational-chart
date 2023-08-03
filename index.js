@@ -1,148 +1,8 @@
 ej.diagrams.Diagram.Inject(ej.diagrams.DataBinding, ej.diagrams.HierarchicalTree,ej.diagrams.UndoRedo,ej.diagrams.PrintAndExport,ej.diagrams.DiagramContextMenu);
-// ej.diagrams.LayoutAnimation = null;
 
 var dropDownDataSources = new DropDownDataSources();
 var diagramEvents = new DiagramClientSideEvents();
 var utilityMethods = new UtilityMethods();
-
-window.onload = function()
-{
-   // document.onmouseover = menumouseover.bind(this);
-}
-  var diagramData = [
-    {
-        "Fill":"white","StrokeColor":"black","FontFamily":"Arial","IsBold":false,"IsItalic":false,"Decoration":"None","FontSize":12,"color":"black","Id": "parent", "Name": "Maria Anders", "Designation": "Managing Director",
-        "IsExpand": "true", "RatingColor": "#C34444","ImageUrl":'./images/maria.png', "EmployeeID":'SYNC1001',"Team":"TypeScript","EmailId":'maria.anders@gmail.com',"PhoneNumber":'0324 - 1819301'}, {
-        "Fill":"white","StrokeColor":"black","FontFamily":"Arial","IsBold":false,"IsItalic":false,"Decoration":"None","FontSize":12,"color":"black","Id": 1, "Name": "Ana Trujillo", "Designation": "Project Manager",
-        "IsExpand": "false",
-        "RatingColor": "#68C2DE", "ReportingPerson": "parent","ImageUrl":'./images/carlos.png', "EmployeeID":'SYNC1002',"Team":"Java","EmailId":'ana.truj@gmail.com',"PhoneNumber":'0324 - 1819302'}, {
-        "Fill":"white","StrokeColor":"black","FontFamily":"Arial","IsBold":false,"IsItalic":false,"Decoration":"None","FontSize":12,"color":"black","Id": 2, "Name": "Anto Moreno", "Designation": "Project Lead",
-        "IsExpand": "false",
-        "RatingColor": "#93B85A", "ReportingPerson": 1,"ImageUrl":'./images/daniel.png', "EmployeeID":'SYNC1003',"Team":"Windows","EmailId":'ana.moreno@gmail.com',"PhoneNumber":'0324 - 1819303'}, {
-        "Fill":"white","StrokeColor":"black","FontFamily":"Arial","IsBold":false,"IsItalic":false,"Decoration":"None","FontSize":12,"color":"black","Id": 3, "Name": "Thomas Hardy", "Designation": "Senior S/w Engg",
-        "IsExpand": "false",
-        "RatingColor": "#68C2DE", "ReportingPerson": 2,"ImageUrl":'./images/jaime.png', "EmployeeID":'SYNC1004',"Team":"UX","EmailId":'thomos.hardy@gmail.com',"PhoneNumber":'0324 - 1819304'}, {
-        "Fill":"white","StrokeColor":"black","FontFamily":"Arial","IsBold":false,"IsItalic":false,"Decoration":"None","FontSize":12,"color":"black","Id": 4, "Name": "Christina kaff", "Designation": "S/w Engg",
-        "IsExpand": "false",
-        "RatingColor": "#93B85A", "ReportingPerson": 3,"ImageUrl":'./images/felipe.png', "EmployeeID":'SYNC1005',"Team":"UX","EmailId":'chris.kaff@gmail.com',"PhoneNumber":'0324 - 1819305'}, {
-        "Fill":"white","StrokeColor":"black","FontFamily":"Arial","IsBold":false,"IsItalic":false,"Decoration":"None","FontSize":12,"color":"black","Id": 5, "Name": "Hanna Moos", "Designation": "Project Trainee",
-        "IsExpand": "true",
-        "RatingColor": "#D46E89", "ReportingPerson": 4,"ImageUrl":'./images/helen.png', "EmployeeID":'SYNC1006',"Team":"Windows","EmailId":'hanna.moos@gmail.com',"PhoneNumber":'0324 - 1819306'}, {
-        "Fill":"white","StrokeColor":"black","FontFamily":"Arial","IsBold":false,"IsItalic":false,"Decoration":"None","FontSize":12,"color":"black","Id": 6, "Name": "Peter Citeaux", "Designation": "S/w Engg",
-        "IsExpand": "true",
-        "RatingColor": "#68C2DE", "ReportingPerson": 5,"ImageUrl":'./images/rene.png', "EmployeeID":'SYNC1007',"Team":"Java","EmailId":'peter.cite@gmail.com',"PhoneNumber":'0324 - 1819307'}, {
-        "Fill":"white","StrokeColor":"black","FontFamily":"Arial","IsBold":false,"IsItalic":false,"Decoration":"None","FontSize":12,"color":"black","Id": 7, "Name": "Martín Kloss", "Designation": "Project Trainee",
-        "IsExpand": "false",
-        "RatingColor": "#93B85A", "ReportingPerson": 6,"ImageUrl":'./images/yoshi.png', "EmployeeID":'SYNC1008',"Team":"UX","EmailId":'martin.kloss@gmail.com',"PhoneNumber":'0324 - 1819308'}, {
-        "Fill":"white","StrokeColor":"black","FontFamily":"Arial","IsBold":false,"IsItalic":false,"Decoration":"None","FontSize":12,"color":"black","Id": 8, "Name": "Elizabeth Mary", "Designation": "Project Trainee",
-        "IsExpand": "None",
-        "RatingColor": "#93B85A", "ReportingPerson": 6,"ImageUrl":'./images/yvonne.png', "EmployeeID":'SYNC1009',"Team":"Java","EmailId":'elizabeth.marys@gmail.com',"PhoneNumber":'0324 - 1819309'}, {
-        "Fill":"white","StrokeColor":"black","FontFamily":"Arial","IsBold":false,"IsItalic":false,"Decoration":"None","FontSize":12,"color":"black","Id": 9, "Name": "Victoria Ash", "Designation": "Senior S/w Engg",
-        "IsExpand": "None",
-        "RatingColor": "#D46E89", "ReportingPerson": 5,"ImageUrl":'./images/carlos.png', "EmployeeID":'SYNC1010',"Team":"React","EmailId":'victoria.ash@gmail.com',"PhoneNumber":'0324 - 1819310'}, {
-        "Fill":"white","StrokeColor":"black","FontFamily":"Arial","IsBold":false,"IsItalic":false,"Decoration":"None","FontSize":12,"color":"black","Id":10, "Name": "Francisco Yang", "Designation": "Senior S/w Engg",
-        "IsExpand": "None",
-        "RatingColor": "#93B85A", "ReportingPerson": 3,"ImageUrl":'./images/maria.png', "EmployeeID":'SYNC1011',"Team":"Java","EmailId":'francisco.yang@gmail.com',"PhoneNumber":'0324 - 1819311'},{
-        "Fill":"white","StrokeColor":"black","FontFamily":"Arial","IsBold":false,"IsItalic":false,"Decoration":"None","FontSize":12,"color":"black","Id": 17, "Name": "Ann Devon", "Designation": "Project Manager",
-        "IsExpand": "false",
-        "RatingColor": "#68C2DE", "ReportingPerson": 25,"ImageUrl":'./images/yoshi-kenna.png', "EmployeeID":'SYNC1012',"Team":"UX","EmailId":'Ann.devon@gmail.com',"PhoneNumber":'0324 - 1819312'}, {
-        "Fill":"white","StrokeColor":"black","FontFamily":"Arial","IsBold":false,"IsItalic":false,"Decoration":"None","FontSize":12,"color":"black","Id": 18, "Name": "Roland Mendel", "Designation": "Project Lead",
-        "IsExpand": "true",
-        "RatingColor": "#68C2DE", "ReportingPerson": 17,"ImageUrl":'./images/carlos.png', "EmployeeID":'SYNC1013',"Team":"UX","EmailId":'roland.mendel@gmail.com',"PhoneNumber":'0324 - 1819313'}, {
-        "Fill":"white","StrokeColor":"black","FontFamily":"Arial","IsBold":false,"IsItalic":false,"Decoration":"None","FontSize":12,"color":"black","Id": 19, "Name": "Aria Cruz", "Designation": "Senior S/w Engg",
-        "IsExpand": "false",
-        "RatingColor": "#93B85A", "ReportingPerson": 18,"ImageUrl":'./images/daniel.png', "EmployeeID":'SYNC1014',"Team":"Angular","EmailId":'aria.cruz@gmail.com',"PhoneNumber":'0324 - 1819314'}, {
-        "Fill":"white","StrokeColor":"black","FontFamily":"Arial","IsBold":false,"IsItalic":false,"Decoration":"None","FontSize":12,"color":"black","Id": 20, "Name": "Martine Rancé", "Designation": "S/w Engg",
-        "IsExpand": "None",
-        "RatingColor": "#93B85A", "ReportingPerson": 18,"ImageUrl":'./images/helen.png', "EmployeeID":'SYNC1015',"Team":"UX","EmailId":'martina.rance@gmail.com',"PhoneNumber":'0324 - 1819315'}, {
-        "Fill":"white","StrokeColor":"black","FontFamily":"Arial","IsBold":false,"IsItalic":false,"Decoration":"None","FontSize":12,"color":"black","Id": 21, "Name": "Maria Larsson", "Designation": "Project Trainee",
-        "IsExpand": "false",
-        "RatingColor": "#EBB92E", "ReportingPerson": 19,"ImageUrl":'./images/maria.png', "EmployeeID":'SYNC1016',"Team":"UX","EmailId":'maria.larsson@gmail.com',"PhoneNumber":'0324 - 1819316'}, {
-        "Fill":"white","StrokeColor":"black","FontFamily":"Arial","IsBold":false,"IsItalic":false,"Decoration":"None","FontSize":12,"color":"black","Id": 22, "Name": "Diego Roel", "Designation": "Project Trainee",
-        "IsExpand": "false",
-        "RatingColor": "#D46E89", "ReportingPerson": 21,"ImageUrl":'./images/jaime.png', "EmployeeID":'SYNC1017',"Team":"TypeScript","EmailId":'diego.roel@gmail.com',"PhoneNumber":'0324 - 1819317'}, {
-        "Fill":"white","StrokeColor":"black","FontFamily":"Arial","IsBold":false,"IsItalic":false,"Decoration":"None","FontSize":12,"color":"black","Id": 23, "Name": "Peter Franken", "Designation": "Project Trainee",
-       "IsExpand": "None",
-        "RatingColor": "#D46E89", "ReportingPerson": 21,"ImageUrl":'./images/felipe.png', "EmployeeID":'SYNC1018',"Team":"JavaScript","EmailId":'peter.franken@gmail.com',"PhoneNumber":'0324 - 1819318'},{
-        "Fill":"white","StrokeColor":"black","FontFamily":"Arial","IsBold":false,"IsItalic":false,"Decoration":"None","FontSize":12,"color":"black","Id": 25, "Name": "Carine Schmitt", "Designation": "Project Manager",
-        "IsExpand": "None",
-        "RatingColor": "#EBB92E", "ReportingPerson": "parent","ImageUrl":'./images/maria.png', "EmployeeID":'SYNC1019',"Team":"Java","EmailId":'carine.schmit@gmail.com',"PhoneNumber":'0324 - 1819319'}, {
-        "Fill":"white","StrokeColor":"black","FontFamily":"Arial","IsBold":false,"IsItalic":false,"Decoration":"None","FontSize":12,"color":"black","Id": 26, "Name": "Paolo Accorti", "Designation": "Project Lead",
-        "IsExpand": "None",
-        "RatingColor": "#D46E89", "ReportingPerson": 36,"ImageUrl":'./images/yvonne.png', "EmployeeID":'SYNC1020',"Team":"React","EmailId":'paolo.acc@gmail.com',"PhoneNumber":'0324 - 1819320'}, {
-        "Fill":"white","StrokeColor":"black","FontFamily":"Arial","IsBold":false,"IsItalic":false,"Decoration":"None","FontSize":12,"color":"black","Id": 27, "Name": "Eduardo Roel", "Designation": "Senior S/w Engg",
-        "IsExpand": "true",
-        "RatingColor": "#93B85A", "ReportingPerson": 26,"ImageUrl":'./images/sergio.png', "EmployeeID":'SYNC1021',"Team":"JavaScript","EmailId":'eduardo.roel@gmail.com',"PhoneNumber":'0324 - 1819321'}, {
-        "Fill":"white","StrokeColor":"black","FontFamily":"Arial","IsBold":false,"IsItalic":false,"Decoration":"None","FontSize":12,"color":"black","Id": 28, "Name": "José Pedro", "Designation": "Senior S/w Engg",
-        "IsExpand": "true",
-        "RatingColor": "#D46E89", "ReportingPerson": 27,"ImageUrl":'./images/yoshi-kenna.png', "EmployeeID":'SYNC1022',"Team":"Java","EmailId":'josé.pedro@gmail.com',"PhoneNumber":'0324 - 1819322'}, {
-        "Fill":"white","StrokeColor":"black","FontFamily":"Arial","IsBold":false,"IsItalic":false,"Decoration":"None","FontSize":12,"color":"black","Id": 29, "Name": "André Fonseca", "Designation": "Senior S/w Engg",
-        "IsExpand": "true",
-        "RatingColor": "#EBB92E", "ReportingPerson": 28,"ImageUrl":'./images/joseph.png', "EmployeeID":'SYNC1023',"Team":"React","EmailId":'andré.fonseca@gmail.com',"PhoneNumber":'0324 - 1819323'}, {
-        "Fill":"white","StrokeColor":"black","FontFamily":"Arial","IsBold":false,"IsItalic":false,"Decoration":"None","FontSize":12,"color":"black","Id": 30, "Name": "Howard Snyd", "Designation": "S/w Engg",
-       "IsExpand": "false",
-        "RatingColor": "#68C2DE", "ReportingPerson": 29,"ImageUrl":'./images/simon.png', "EmployeeID":'SYNC1024',"Team":"JavaScript","EmailId":'howard.synd@gmail.com',"PhoneNumber":'0324 - 1819324'}, {
-        "Fill":"white","StrokeColor":"black","FontFamily":"Arial","IsBold":false,"IsItalic":false,"Decoration":"None","FontSize":12,"color":"black","Id": 31, "Name": "Manu Pereira", "Designation": "Project Trainee",
-       "IsExpand": "None",
-        "RatingColor": "#D46E89", "ReportingPerson": 29,"ImageUrl":'./images/maria.png', "EmployeeID":'SYNC1025',"Team":"JavaScript","EmailId":'manu.periera@gmail.com',"PhoneNumber":'0324 - 1819325'}, {
-        "Fill":"white","StrokeColor":"black","FontFamily":"Arial","IsBold":false,"IsItalic":false,"Decoration":"None","FontSize":12,"color":"black","Id": 32, "Name": "Mario Pontes", "Designation": "S/w Engg",
-       "IsExpand": "None",
-        "RatingColor": "#D46E89", "ReportingPerson": 29,"ImageUrl":'./images/annette.png', "EmployeeID":'SYNC1026',"Team":"Java","EmailId":'mario.pontes@gmail.com',"PhoneNumber":'0324 - 1819326'}, {
-        "Fill":"white","StrokeColor":"black","FontFamily":"Arial","IsBold":false,"IsItalic":false,"Decoration":"None","FontSize":12,"color":"black","Id": 33, "Name": "Carlos Schmitt", "Designation": "Project Trainee",
-        "IsExpand": "None",
-        "RatingColor": "#D46E89", "ReportingPerson": 29,"ImageUrl":'./images/maria.png', "EmployeeID":'SYNC1027',"Team":"React","EmailId":'carlos.schmitt@gmail.com',"PhoneNumber":'0324 - 1819327'}, {
-        "Fill":"white","StrokeColor":"black","FontFamily":"Arial","IsBold":false,"IsItalic":false,"Decoration":"None","FontSize":12,"color":"black","Id": 34, "Name": "Yoshi Latimer", "Designation": "Project Trainee",
-        "IsExpand": "true",
-        "RatingColor": "#D46E89", "ReportingPerson": 29,"ImageUrl":'./images/daniel.png', "EmployeeID":'SYNC1028',"Team":"React","EmailId":'yoshi.latimer@gmail.com',"PhoneNumber":'0324 - 1819328'}, {
-        "Fill":"white","StrokeColor":"black","FontFamily":"Arial","IsBold":false,"IsItalic":false,"Decoration":"None","FontSize":12,"color":"black","Id": 35, "Name": "Patricia Kenna", "Designation": "Project Trainee",
-        "IsExpand": "true",
-        "RatingColor": "#EBB92E", "ReportingPerson": 29,"ImageUrl":'./images/helen.png', "EmployeeID":'SYNC1029',"Team":"JavaScript","EmailId":'patricia.kenna@gmail.com',"PhoneNumber":'0324 - 1819329'}, {
-        "Fill":"white","StrokeColor":"black","FontFamily":"Arial","IsBold":false,"IsItalic":false,"Decoration":"None","FontSize":12,"color":"black","Id": 36, "Name": "Helen Bennett", "Designation": "Project Lead",
-        "IsExpand": "None",
-        "RatingColor": "#D46E89", "ReportingPerson": 25,"ImageUrl":'./images/rene.png', "EmployeeID":'SYNC1030',"Team":"Java","EmailId":'helen.bennette@gmail.com',"PhoneNumber":'0324 - 1819330'},{
-        "Fill":"white","StrokeColor":"black","FontFamily":"Arial","IsBold":false,"IsItalic":false,"Decoration":"None","FontSize":12,"color":"black","Id": 65, "Name": "Alej Camino", "Designation": "Project Manager",
-       "IsExpand": "false",
-        "RatingColor": "#93B85A", "ReportingPerson": "parent","ImageUrl":'./images/carlos.png', "EmployeeID":'SYNC1031',"Team":"Windows","EmailId":'aleg.camino@gmail.com',"PhoneNumber":'0324 - 1819331'}, {
-        "Fill":"white","StrokeColor":"black","FontFamily":"Arial","IsBold":false,"IsItalic":false,"Decoration":"None","FontSize":12,"color":"black","Id": 66, "Name": "Jonas Bergsen", "Designation": "Project Lead",
-       "IsExpand": "None",
-        "RatingColor": "#68C2DE", "ReportingPerson": 65,"ImageUrl":'./images/joseph.png', "EmployeeID":'SYNC1032',"Team":"JavaScript","EmailId":'jonas.bergsen@gmail.com',"PhoneNumber":'0324 - 1819332'}, {
-        "Fill":"white","StrokeColor":"black","FontFamily":"Arial","IsBold":false,"IsItalic":false,"Decoration":"None","FontSize":12,"color":"black","Id": 67, "Name": "Jose Pavarotti", "Designation": "Project Trainee",
-        "IsExpand": "None",
-        "RatingColor": "#D46E89", "ReportingPerson": 68,"ImageUrl":'./images/maria.png', "EmployeeID":'SYNC1033',"Team":"Windows","EmailId":'jose.pavarotti@gmail.com',"PhoneNumber":'0324 - 1819333'}, {
-        "Fill":"white","StrokeColor":"black","FontFamily":"Arial","IsBold":false,"IsItalic":false,"Decoration":"None","FontSize":12,"color":"black","Id": 68, "Name": "Miguel Angel", "Designation": "Senior S/w Engg",
-        "IsExpand": "None",
-        "RatingColor": "#D46E89", "ReportingPerson": 66,"ImageUrl":'./images/yoshi.png', "EmployeeID":'SYNC1034',"Team":"Angular","EmailId":'miguel.angel@gmail.com',"PhoneNumber":'0324 - 1819334'}, {
-        "Fill":"white","StrokeColor":"black","FontFamily":"Arial","IsBold":false,"IsItalic":false,"Decoration":"None","FontSize":12,"color":"black","Id": 69, "Name": "Jytte Petersen", "Designation": "Senior S/w Engg",
-        "IsExpand": "true",
-        "RatingColor": "#68C2DE", "ReportingPerson": 68,"ImageUrl":'./images/felipe.png', "EmployeeID":'SYNC1035',"Team":"Angular","EmailId":'jytte.petersen@gmail.com',"PhoneNumber":'0324 - 1819335'}, {
-        "Fill":"white","StrokeColor":"black","FontFamily":"Arial","IsBold":false,"IsItalic":false,"Decoration":"None","FontSize":12,"color":"black","Id": 70, "Name": "Kloss Perrier", "Designation": "Project Lead",
-         "IsExpand": "None",
-        "RatingColor": "#93B85A", "ReportingPerson": 72,"ImageUrl":'./images/jytte.png', "EmployeeID":'SYNC1036',"Team":"JavaScript","EmailId":'closs.perrier@gmail.com',"PhoneNumber":'0324 - 1819336'}, {
-        "Fill":"white","StrokeColor":"black","FontFamily":"Arial","IsBold":false,"IsItalic":false,"Decoration":"None","FontSize":12,"color":"black","Id": 71, "Name": "Art Nancy", "Designation": "Senior S/w Engg",
-        "IsExpand": "true",
-        "RatingColor": "#D46E89", "ReportingPerson": 27,"ImageUrl":'./images/rene.png', "EmployeeID":'SYNC1037',"Team":"Java","EmailId":'art.nancy@gmail.com',"PhoneNumber":'0324 - 1819337'}, {
-        "Fill":"white","StrokeColor":"black","FontFamily":"Arial","IsBold":false,"IsItalic":false,"Decoration":"None","FontSize":12,"color":"black","Id": 72, "Name": "Pascal Cartrain", "Designation": "Project Lead",
-        "IsExpand": "true",
-        "RatingColor": "#EBB92E", "ReportingPerson": 65,"ImageUrl":'./images/renete.png', "EmployeeID":'SYNC1038',"Team":"Vue","EmailId":'pascal.cartrain@gmail.com',"PhoneNumber":'0324 - 1819338'}, {
-        "Fill":"white","StrokeColor":"black","FontFamily":"Arial","IsBold":false,"IsItalic":false,"Decoration":"None","FontSize":12,"color":"black","Id": 73, "Name": "Liz Nixon", "Designation": "Senior S/w Engg",
-        "IsExpand": "false",
-        "RatingColor": "#68C2DE", "ReportingPerson": 68,"ImageUrl":'./images/maria.png', "EmployeeID":'SYNC1039',"Team":"JavaScript","EmailId":'liz.nixon@gmail.com',"PhoneNumber":'0324 - 1819339'},{
-        "Fill":"white","StrokeColor":"black","FontFamily":"Arial","IsBold":false,"IsItalic":false,"Decoration":"None","FontSize":12,"color":"black","Id": 89, "Name": "Georg Pipps", "Designation": "Senior S/w Engg",
-        "IsExpand": "None",
-        "RatingColor": "#EBB92E", "ReportingPerson": "parent","ImageUrl":'./images/rene.png', "EmployeeID":'SYNC1040',"Team":"Java","EmailId":'georg.pipps@gmail.com',"PhoneNumber":'0324 - 1819340'}, {
-        "Fill":"white","StrokeColor":"black","FontFamily":"Arial","IsBold":false,"IsItalic":false,"Decoration":"None","FontSize":12,"color":"black","Id": 30, "Name": "Isabel Castro", "Designation": "Project Trainee",
-       "IsExpand": "None",
-        "RatingColor": "#D46E89", "ReportingPerson": 89,"ImageUrl":'./images/jhon.png', "EmployeeID":'SYNC1041',"Team":"Windows","EmailId":'isabel.castro@gmail.com',"PhoneNumber":'0324 - 1819341'}, {
-        "Fill":"white","StrokeColor":"black","FontFamily":"Arial","IsBold":false,"IsItalic":false,"Decoration":"None","FontSize":12,"color":"black","Id": 90, "Name": "Rene Phillips", "Designation": "Project Trainee",
-        "IsExpand": "false",
-        "RatingColor": "#68C2DE", "ReportingPerson": 89,"ImageUrl":'./images/jytte.png', "EmployeeID":'SYNC1042',"Team":"JavaScript","EmailId":'rene.phillips@gmail.com',"PhoneNumber":'0324 - 1819342'}, {
-        "Fill":"white","StrokeColor":"black","FontFamily":"Arial","IsBold":false,"IsItalic":false,"Decoration":"None","FontSize":12,"color":"black","Id": 91, "Name": "Lúcia Carvalho", "Designation": "Project Trainee",
-        "IsExpand": "None",
-        "RatingColor": "#93B85A", "ReportingPerson": 89,"ImageUrl":'./images/yoshi-kenna.png', "EmployeeID":'SYNC1043',"Team":"Java","EmailId":'lúcia.carvalho@gmail.com',"PhoneNumber":'0324 - 1819343'}, {
-        "Fill":"white","StrokeColor":"black","FontFamily":"Arial","IsBold":false,"IsItalic":false,"Decoration":"None","FontSize":12,"color":"black","Id": 92, "Name": "Horst Kloss", "Designation": "Project Trainee",
-       "IsExpand": "None",
-        "RatingColor": "#D46E89", "ReportingPerson": 89,"ImageUrl":'./images/helen.png', "EmployeeID":'SYNC1044',"Team":"Angular","EmailId":'horst.kloss@gmail.com',"PhoneNumber":'0324 - 1819344'},
-];
 
     var data =[
         {
@@ -283,9 +143,6 @@ window.onload = function()
         {
             name: 'Add New Child',pathData: 'M13.55896,0L18.461914,0 18.461914,13.557983 32,13.557983 32,18.481018 18.5,18.481018 18.5,32 13.55896,32 13.55896,18.481018 0,18.481018 0,13.557983 13.55896,13.557983z',
             offset:1,side: 'Bottom',tooltip:{content:'Add New Child',position:'BottomRight'}},
-            //  {
-            // name: 'Collapse', pathData: 'M16.261993,0L16.359985,0.065002445 16.454987,0 16.48999,0.15399169 32,11.294986 32,19.745 16.359985,8.5149861 0,19.745 0,11.294986 16.22699,0.15399169z',tooltip:{content:'Expand/Collapse',position:'BottomRight'},
-            // visible: true, offset: 0.5, side: 'Bottom', margin: { top: 0, bottom: 0, left: 0, right: 0 }}, 
             {
             name: 'Edit Fields', pathData: 'M19.312381,27.48482L18.503085,29.661004 20.944314,29.115917z M24.540007,21.633355L20.390685,25.734296 22.789237,28.131621 26.97936,24.028763z M27.175001,19.029084L25.962399,20.227547 28.408086,22.629793 29.616994,21.446061z M10.602995,15C5.8599977,15 1.999999,18.829 1.999999,23.536 1.999999,24.895 3.1159983,26 4.4899979,26L17.731456,26 17.992104,25.299033 18.172095,25.116051 18.171058,25.116051 23.266144,20.080393 23.156942,19.84575C22.697614,18.897562 22.06124,18.03375 21.28199,17.31 19.682991,15.82 17.592992,15 15.397993,15L12.999995,15z M12.999995,2C9.9420033,2 7.45401,4.467 7.45401,7.5 7.45401,9.947 9.1090055,12.123 11.478999,12.791 12.461997,13.068 13.535994,13.069 14.521991,12.791 16.891984,12.122 18.54598,9.9459996 18.54598,7.5 18.54598,4.467 16.057987,2 12.999995,2z M12.999995,0C17.160984,0 20.545975,3.3639994 20.545975,7.5 20.545975,9.6899061 19.575261,11.720467 17.995872,13.115179L17.808254,13.274325 17.879796,13.290484C19.650854,13.712344 21.290927,14.584437 22.645989,15.846 23.445364,16.590375 24.124036,17.454672 24.656125,18.399828L24.764509,18.599506 26.399983,16.983108C26.614001,16.772111 26.895004,16.666856 27.175756,16.666978 27.456508,16.6671 27.737007,16.772599 27.950018,16.983108L31.969938,20.961079 31.999967,21.450059C31.999967,21.74208,31.88095,22.027051,31.672944,22.233074L23.04003,30.684984 22.706048,30.770982 17.325118,31.973977C17.245102,31.991006 17.165085,31.999978 17.085069,31.999978 16.769093,31.999978 16.464103,31.863993 16.252069,31.619976 15.987118,31.314985 15.91113,30.89 16.054073,30.511035L16.987776,28 4.4899979,28C2.013999,28 0,25.997 0,23.536 0,18.633812 3.3858614,14.50334 7.9561033,13.332249L8.1918802,13.274945 8.0051279,13.116582C6.4251604,11.721779 5.4540157,9.6905622 5.4540157,7.5 5.4540157,3.3639994 8.8390064,0 12.999995,0z',
             visible: true, offset: 1, side: 'Top', margin: { top: 0, bottom: 0, left: 0, right: 0 },tooltip:{content:'Edit Fields',position:'BottomRight'}
@@ -493,7 +350,6 @@ function getContent(obj) {
   }
   
   
-
   //Initialize Toolbar component
   var toolbarObj = new ej.navigations.Toolbar({
     clicked: function (args) { UtilityMethods.prototype.toolbarClick(args)},
@@ -535,8 +391,6 @@ var fontColorBtn = new ej.inputs.ColorPicker({
     change: function (args) { UtilityMethods.prototype.fontColorChange(args) },
     value: '#000000',
     mode: 'Palette',
-    popupHeight: '200px',
-    width: '100px',
     modeSwitcher: true,
 });
 fontColorBtn.appendTo('#fontColorBtn');
@@ -544,11 +398,8 @@ fontColorBtn.appendTo('#fontColorBtn');
 // Iniatilize the color picker component for fill color change
 var fillColorBtn = new ej.inputs.ColorPicker({
     change: function (args) { UtilityMethods.prototype.fillColorChange(args) },
-    // value: '#ffffff',
     mode: 'Palette',
-    // popupHeight: '200px',
-    // width: '100px',
-    // modeSwitcher: true,
+    modeSwitcher: true
 });
 fillColorBtn.appendTo('#fillColorBtn');
 
@@ -557,8 +408,6 @@ var strokeColorBtn = new ej.inputs.ColorPicker({
     change: function (args) { UtilityMethods.prototype.strokeColorChange(args) },
     value: '#000000',
     mode: 'Palette',
-    popupHeight: '200px',
-    width: '100px',
     modeSwitcher: true,
 });
 strokeColorBtn.appendTo('#strokeColorBtn');
@@ -740,8 +589,6 @@ var fieldsList = new ej.dropdowns.MultiSelect({
     // set true for enable the selectAll support.
     showSelectAll: true,
     value: ['Name', 'Desig'],
-    // set true for enable the dropdown icon.
-    // showDropDownIcon: true,
     // set the placeholder to MultiSelect filter input element
     filterBarPlaceholder: 'Search data',
     // set the MultiSelect popup height
@@ -901,8 +748,6 @@ var searchDropDown = new ej.dropdowns.DropDownList({
 searchDropDown.appendTo('#searchDropDown');
 
 
-
-
 // Iniatilize the uploader component.
 var uploadObj = new ej.inputs.Uploader({
     asyncSettings: {
@@ -952,69 +797,9 @@ function applyBase64AsImageUrl(base64String) {
     let selectedNode = diagram.selectedItems.nodes[0];
     selectedNode.data.ImageUrl = base64String;
     diagram.dataSourceSettings.dataSource.dataSource.json.find(x=>x.Id == selectedNode.data.Id).ImageUrl = base64String;
-    diagramData.find(x=>x.Id == selectedNode.data.Id).ImageUrl = base64String;
     var imageTag = document.getElementById(selectedNode.id+'_picimage');
     imageTag.href.baseVal = base64String;
-    // diagram.dataBind();
-    // diagram.clear();
-    // diagram.refresh();
-    // diagram.fitToPage({ mode: 'Page', region: 'Content'});
 }
-
-
-// var btnFileMenu = new ej.splitbuttons.DropDownButton({
-//     cssClass: 'db-dropdown-menu',
-//     items: DropDownDataSources.prototype.getFileMenuItems(),
-//     content: 'File',
-//     select: function (args) { UtilityMethods.prototype.menuClick(args) },
-//     beforeItemRender: beforeItemRender,
-//     beforeOpen: arrangeMenuBeforeOpen,
-//     beforeClose: arrangeMenuBeforeClose
-// });
-// btnFileMenu.appendTo('#btnFileMenu');
-
-// var btnViewMenu = new ej.splitbuttons.DropDownButton({
-//     cssClass: 'db-dropdown-menu',
-//     items: DropDownDataSources.prototype.getViewMenuItems(),
-//     content: 'View',
-//     select: function (args) { UtilityMethods.prototype.menuClick(args) },
-//     beforeItemRender: beforeItemRender,
-//     beforeOpen: arrangeMenuBeforeOpen,
-//     beforeClose: arrangeMenuBeforeClose
-// });
-// btnViewMenu.appendTo('#btnViewMenu');
-
-
-// function designContextMenuOpen (args) {
-//     if (args.element.classList.contains('e-menu-parent')) {
-//         var popup = document.querySelector('#btnDesignMenu-popup');
-//         args.element.style.left = ej.base.formatUnit(parseInt(args.element.style.left, 10) - parseInt(popup.style.left, 10));
-//         args.element.style.top = ej.base.formatUnit(parseInt(args.element.style.top, 10) - parseInt(popup.style.top, 10));
-//     }
-// }
-
-// function arrangeMenuBeforeOpen(args)
-// {
-//     for (var i = 0; i < args.element.children.length; i++) {
-//         args.element.children[i].style.display = 'block';
-//     }
-//     //(args.element.children[0]).style.display = 'block';
-//     if (args.event && ej.base.closest(args.event.target, '.e-dropdown-btn') !== null) {
-//         args.cancel = true;
-//     }
-// }
-
-// function arrangeMenuBeforeClose(args)
-// {
-//     if (args.event && ej.base.closest(args.event.target, '.e-dropdown-btn') !== null) {
-//         args.cancel = true;
-//     }
-//     if (!args.element) {
-//         args.cancel = true;
-//     }
-// }
-
-
 
 function beforeItemRender(args) {
     var shortCutText = getShortCutKey(args.item.text);
@@ -1026,14 +811,6 @@ function beforeItemRender(args) {
         args.element.appendChild(shortCutSpan);
         shortCutSpan.setAttribute('class', 'db-shortcut');
     }
-    // var status = enableMenuItems(args.item.text, diagram);
-    // if (status) {
-    //     args.element.classList.add('e-disabled');
-    // } else {
-    //     if (args.element.classList.contains('e-disabled')) {
-    //         args.element.classList.remove('e-disabled');
-    //     }
-    // }
 }
 
 function getShortCutKey(menuItem) {
@@ -1048,160 +825,12 @@ function getShortCutKey(menuItem) {
         case 'Save':
             shortCutKey = shortCutKey + '+S';
             break;
-        case 'Undo':
-            shortCutKey = shortCutKey + '+Z';
-            break;
-        case 'Redo':
-            shortCutKey = shortCutKey + '+Y';
-            break;
-        case 'Cut':
-            shortCutKey = shortCutKey + '+X';
-            break;
-        case 'Copy':
-            shortCutKey = shortCutKey + '+C';
-            break;
-        case 'Paste':
-            shortCutKey = shortCutKey + '+V';
-            break;
-        case 'Delete':
-            shortCutKey = 'Delete';
-            break;
-        case 'Select All':
-            shortCutKey = shortCutKey + '+A';
-            break;
-        case 'Zoom In':
-            shortCutKey = shortCutKey + '++';
-            break;
-        case 'Zoom Out':
-            shortCutKey = shortCutKey + '+-';
-            break;
-        case 'Zoom to Fit':
-            shortCutKey = shortCutKey + '+0';
-            break;
-        case 'Zoom to 50%':
-            shortCutKey = shortCutKey + '+1';
-            break;
-        case 'Zoom to 100%':
-            shortCutKey = shortCutKey + '+2';
-            break;
-        case 'Zoom to 200%':
-            shortCutKey = shortCutKey + '+3';
-            break;
         default:
             shortCutKey = '';
             break;
     }
     return shortCutKey;
 }
-
-// function enableMenuItems(itemText, diagram) {
-//     var selectedItems = diagram.selectedItems.nodes;
-//     selectedItems = selectedItems.concat(diagram.selectedItems.connectors);
-//     if (itemText) {
-//         var commandType = itemText.replace(/[' ']/g, '');
-//         if (selectedItems.length === 0) {
-//             switch (commandType.toLowerCase()) {
-//                 case 'cut':
-//                     return true;
-//                 case 'copy':
-//                     return true;
-//                 case 'delete':
-//                     return true;
-//             }
-//         }
-//         if (!(diagram.commandHandler.clipboardData.pasteIndex !== undefined
-//             && diagram.commandHandler.clipboardData.clipObject !==undefined) && itemText === 'Paste') {
-//             return true;
-//         }
-//         if (itemText === 'Undo' && diagram.historyManager.undoStack.length<1) {
-//             return true;
-//         }
-//         if (itemText === 'Redo' && diagram.historyManager.redoStack.length<1) {
-//             return true;
-//         }
-//         if(itemText === 'Rotate Clockwise' && diagram.selectedItems.nodes.length < 1)
-//         {
-//             return true;
-//         }
-//         if(itemText === 'Rotate Counter Clockwise' && diagram.selectedItems.nodes.length < 1)
-//         {
-//             return true;
-//         }
-//         if(itemText === 'Send To Back' && selectedItems.length === 0)
-//         {
-//             return true;
-//         }
-//         if(itemText === 'Bring To Front' && selectedItems.length === 0)
-//         {
-//             return true;
-//         }
-//         if(itemText === 'Bring Forward' && selectedItems.length === 0)
-//         {
-//             return true;
-//         }
-//         if(itemText === 'Send Backward' && selectedItems.length === 0)
-//         {
-//             return true;
-//         }
-//     }
-//     return false;
-// };
-
-// function menumouseover(args) {
-//     var target = args.target;
-//     if (target && (target.className === 'e-control e-dropdown-btn e-lib e-btn db-dropdown-menu' ||
-//         target.className === 'e-control e-dropdown-btn e-lib e-btn db-dropdown-menu e-ddb-active')) {
-//         if (this.buttonInstance && this.buttonInstance.id !== target.id) {
-//             if (this.buttonInstance.getPopUpElement().classList.contains('e-popup-open')) {
-//                 this.buttonInstance.toggle();
-//                 var buttonElement = document.getElementById(this.buttonInstance.element.id);
-//                 buttonElement.classList.remove('e-btn-hover');
-//             }
-//         }
-//         var button1 = target.ej2_instances[0];
-//         this.buttonInstance = button1;
-//         if (button1.getPopUpElement().classList.contains('e-popup-close')) {
-//             button1.toggle();
-//             if(button1.element.id === 'btnEditMenu') {
-//                 enableEditMenuItems(diagram);
-//             }
-//             var buttonElement1 = document.getElementById(this.buttonInstance.element.id);
-//             buttonElement1.classList.add('e-btn-hover');
-//         }
-//     } else {
-//         if (ej.base.closest(target, '.e-dropdown-popup') === null && ej.base.closest(target, '.e-dropdown-btn') === null) {
-//             if (this.buttonInstance && this.buttonInstance.getPopUpElement().classList.contains('e-popup-open')) {
-//                 this.buttonInstance.toggle();
-//                 var buttonElement2 = document.getElementById(this.buttonInstance.element.id);
-//                 buttonElement2.classList.remove('e-btn-hover');
-//             }
-//         }
-//     }
-// };
-
-// var designContextMenu = new ej.navigations.ContextMenu({
-//     animationSettings: { effect: 'None' },
-//     items:DropDownDataSources.prototype.getDesignMenuItems(),
-//     onOpen: designContextMenuOpen,
-//     cssClass: "DesignMenu",
-//     beforeItemRender: beforeItemRender,
-//     select: function (args) { UtilityMethods.prototype.menuClick(args) },
-//     beforeClose: arrangeMenuBeforeClose
-// })
-// designContextMenu.appendTo('#designContextMenu');
-
-// var btnDesignMenu = new ej.splitbuttons.DropDownButton({
-//     cssClass: 'db-dropdown-menu',
-//     target: '.e-contextmenu-wrapper.designMenu',
-//     content: 'Design',
-//     select: function (args) { UtilityMethods.prototype.menuClick(args) },
-//     beforeItemRender: beforeItemRender,
-//     beforeOpen: arrangeMenuBeforeOpen,
-//     beforeClose: arrangeMenuBeforeClose
-// });
-// btnDesignMenu.appendTo('#btnDesignMenu');
-
-    // Menu items definition 
     var menuItems = [
         {
             text: 'File',
@@ -1218,7 +847,7 @@ function getShortCutKey(menuItem) {
     ];
 
     //Menu initialization
-    new ej.navigations.Menu({ items: menuItems ,beforeItemRender:beforeItemRender,select:menuClick}, '#menu');
+   var menubar =  new ej.navigations.Menu({ items: menuItems ,beforeItemRender:beforeItemRender,select:menuClick}, '#menu');
 
    function menuClick (args)
     {

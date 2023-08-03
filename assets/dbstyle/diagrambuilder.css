@@ -213,17 +213,6 @@ input, button, select, textarea {
     content: '\ec0f';
   }
 
-/* .db-property-editor-container {
-    width:260px;
-    background: #e3e3e3;
-    height: 100%;
-    float: right;
-    padding: 10px;
-    overflow: auto;
-    border-left: 1px solid #CBCBCB;
-    border-top: 1px solid #CBCBCB;
-} */
-
 /* SymbolPalette - Customization Start */
 
 .e-accordion .e-acrdn-item.e-select {
@@ -260,46 +249,10 @@ input, button, select, textarea {
 
 /* SymbolPalette - Customization End */
 
-/* Window Show/Hide Customization - start */
-
-/* .diagrambuilder-container.hide-menubar .db-header-container {
-    display: none;
-}
-
-.diagrambuilder-container.hide-menubar .sidebar,
-.diagrambuilder-container.hide-menubar .main-content {
-    top: 48px;
-    height: calc(100% - 48px);
-}
-
-.diagrambuilder-container.hide-toolbar .db-toolbar-editor {
-    display: none;
-}
-
-.diagrambuilder-container.hide-toolbar .sidebar, 
-.diagrambuilder-container.hide-toolbar .main-content {
-    height: calc(100% - 64px);
-} */
-
-
-/* .diagrambuilder-container.hide-palette .main-content {
-    left: 0px;
-    width: 100%;
-}
-
-.diagrambuilder-container.hide-palette .sidebar {
-    display: none;
-} */
-
 .diagrambuilder-container.hide-properties .main-content {
     width: 100%;
 }
 
-/* .db-diagram-container {
-    width:calc(100%-260px);
-    height: 100%;
-    float: right;
-} */
 
 .diagrambuilder-container.hide-properties .db-property-editor-container {
     display: none;
@@ -321,83 +274,9 @@ input, button, select, textarea {
     display: none;
 }
 
-/* .diagrambuilder-container.custom-diagram .sidebar {
-    z-index: 100000000;
-    width: 30px;
-    display: block;
-}
-
-.diagrambuilder-container.custom-diagram .db-palette-parent {
-    display: none;
-}
-
-.diagrambuilder-container.custom-diagram .db-palette-more-shapes {
-    width: 30px;
-    border-right: 1px solid #CBCBCB;
-    padding: 0px 6px;
-}
-
-.diagrambuilder-container.custom-diagram .db-palette-more-shapes-text {
-    display: none;
-}
-
-.diagrambuilder-container.custom-diagram .db-more-diagram-options-container {
-    width: calc(100% - 298px);
-    position: absolute;
-    left: 28px;
-} */
-
-/* Window Show/Hide Customization - end */
-
-/* Show/Hide Diagram's Ruler/Grid Customization - Start */
-
-/* .db-current-diagram-container {
-    border-top: 1px solid #CBCBCB;
-    border-left: 1px solid #CBCBCB;
-} */
-
 .db-current-diagram-container.db-show-ruler {
     border-width: 0px;
 }
-
-/* Show/Hide Diagram's Ruler/Grid Customization - End */
-
-
-/* Page Options Customizaion - Start */
-
-/* .db-more-diagram-options-container {
-    height: 28px;
-    background-color:#F1F1F1; 
-    border-top: 1px solid #CBCBCB;
-    border-left: 1px solid #CBCBCB;
-}
-
-#pageOptionList {
-    height: 100%;
-}
-
-.db-more-diagram-options-container .e-btn {
-    text-transform: none;
-    font-weight: 400;
-    font-size: 12px;
-    box-shadow: 0 0 0 0;
-    height: 100%;
-    border-width: 0px 1px 0px 0px;
-    border-color: #D4D4D4;
-    color: #515151;
-    background-color: #f0f0f0;
-    text-overflow: ellipsis;
-    overflow: hidden;
-}
-
-.db-more-diagram-options-container .e-btn.db-active-page {
-    background-color: #ffffff;
-} */
-
-/* Page Options Customizaion - End */
-
-/* Diagram Adorner Layer, Ruler, Context Menu Customization - Start */
-
 .e-diagram #diagram_editBox {
     box-sizing: content-box;
     min-width: 50px !important;
@@ -791,27 +670,6 @@ input, button, select, textarea {
 #nodeBorderStyle_popup .e-list-item {
     padding-right: 0px;
 }
-
-.ddl_linestyle_none {
-    background-image: url('common_images/linestyle/0,0.svg');
-}
-
-.ddl_linestyle_one_two {
-    background-image: url('common_images/linestyle/1,2.svg');
-}
-
-.ddl_linestyle_three_three {
-    background-image: url('common_images/linestyle/3,3.svg');
-}
-
-.ddl_linestyle_five_three {
-    background-image: url('common_images/linestyle/5,3.svg');
-}
-
-.ddl_linestyle_four_four_one {
-    background-image: url('common_images/linestyle/4,4,1.svg');
-}
-
 .e-toolbar .e-toolbar-items:first-child > .e-toolbar-item:last-child {
     margin-right: 0px;
 }
@@ -1041,10 +899,6 @@ input[type="color"]::-moz-color-swatch {
     /* border-radius: 3px; */
 }
 
-/* .db-text-container:hover,
-.db-color-container:hover {
-    border: 1px solid #B2B2B2;
-} */
 
 .db-color-input {
     width: 100%;
@@ -1127,10 +981,6 @@ input[type="color"]::-moz-color-swatch {
 
 /* Property Panel Customization - End */
 
-/* .db-property-editor-container .e-input-group, 
-.db-property-editor-container .e-input-group.e-control-wrapper {
-    margin-bottom: 0px;
-} */
 
 /* Numeric Text box Customization - Start */
 
@@ -1759,57 +1609,6 @@ input.db-layer-edit {
     pointer-events: none;
 }
 
-.db-theme-style:hover {
-    border: 2px solid black;
-}
-
-.theme1 {
-    background-image: url('./themes_images/Theme_1.png');
-}
-
-.theme2 {
-    background-image: url('./themes_images/Theme_2.png');
-}
-
-.theme3 {
-    background-image: url('./themes_images/Theme_3.png');
-}
-
-.theme4 {
-    background-image: url('./themes_images/Theme_4.png');
-}
-
-.theme5 {
-    background-image: url('./themes_images/Theme_5.png');
-}
-
-.theme6 {
-    background-image: url('./themes_images/Theme_6.png');
-}
-
-.theme7 {
-    background-image: url('./themes_images/Theme_7.png');
-}
-
-.theme8 {
-    background-image: url('./themes_images/Theme_8.png');
-}
-
-.theme9 {
-    background-image: url('./themes_images/Theme_9.png');
-}
-
-.theme10 {
-    background-image: url('./themes_images/Theme_10.png');
-}
-
-.theme11 {
-    background-image: url('./themes_images/Theme_11.png');
-}
-
-.theme12 {
-    background-image: url('./themes_images/Theme_12.png');
-}
 
 /* Theme Dialog Customization End */
 
@@ -2293,23 +2092,3 @@ input.e-input::selection,
     color: #515151;
     font-size: 12px;
 }
-/* Not Needed As of Now */
-
-/* #shortCutDialog .e-dlg-header-content + .e-dlg-content {
-    padding: 0px;
-}
-
-.db-shortcut-template-div {
-    padding: 5px 16px;
-    font-size: 13px;
-    font-weight: 500;
-    border-bottom: 1px solid #D4D4D4;
-}
-
-#shortcutContainerDiv:last-child {
-    border-bottom: 0px;
-}
-
-#shortCutDialog .col-xs-6 {
-    padding: 0px;
-} */

@@ -25,7 +25,7 @@ var DropDownDataSources = (function () {
                             { type: 'Separator' },
             { prefixIcon: 'sf-icon-pointer', tooltipText: 'Select Tool',cssClass:'tb-item-start tb-item-selected'},
             { prefixIcon: 'sf-icon-pan', tooltipText: 'Pan Tool',cssClass:'tb-item-middle'},
-            { prefixIcon: 'sf-icon-zoom-in', tooltipText: 'Pan and Zoom',cssClass:'tb-item-end '},
+            { prefixIcon: 'sf-icon-zoom-in', tooltipText: 'Overview',cssClass:'tb-item-end '},
 
         ];
         return items;

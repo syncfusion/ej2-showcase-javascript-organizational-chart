@@ -42,7 +42,7 @@ var UtilityMethods = (function () {
                 diagram.clearSelection()
                 diagram.tool = ej.diagrams.DiagramTools.ZoomPan;
                 break;
-            case 'Pan and Zoom':
+            case 'Overview':
                 let position = document.getElementById('overview-container').style.position;
                 if(position === 'absolute'){
                     document.getElementById('overview-container').style.position = '';
@@ -65,174 +65,6 @@ var UtilityMethods = (function () {
         }
         diagram.dataBind();
      };
-       // To execute menubar click operation
-    UtilityMethods.prototype.menuClick = function(args)
-    {
-        // var buttonElement = document.getElementsByClassName('e-btn-hover')[0];
-        // if (buttonElement) {
-        //     buttonElement.classList.remove('e-btn-hover');
-        // }
-        var option = args.item.text;
-        switch(option)
-        {
-            case 'New':
-                diagram.clear();
-                DiagramClientSideEvents.prototype.historyChange();
-                break;
-            case 'Save':
-                this.download(diagram.saveDiagram());
-                break;
-            case 'Print':
-                printSettings.pageHeight = pageSettings.pageHeight;
-                printSettings.pageWidth = pageSettings.pageWidth;
-                printSettings.paperSize = pageSettings.paperSize;
-                printSettings.isPortrait = pageSettings.isPortrait;
-                printSettings.isLandscape = !pageSettings.isPortrait;
-                printDialog.show();
-                break;
-            case 'Export':
-                exportDialog.show();
-                break;
-            case 'Open':
-                document.getElementsByClassName('e-file-select-wrap')[0].querySelector('button').click();
-                break;
-            case 'Undo':
-                diagram.undo();
-                break;
-            case 'Redo':
-                diagram.redo();
-                break;
-            case 'Cut':
-                diagram.cut();
-                break;
-            case 'Copy':
-                diagram.copy();
-                break;
-            case 'Paste':
-                diagram.paste();
-                break;
-            case 'Rotate Right 90':
-                diagram.rotate(diagram.selectedItems,90);
-                break;
-            case 'Rotate Left 90':
-                diagram.rotate(diagram.selectedItems,-90);
-                break;
-            case 'Flip Vertical':
-                flipObjects(option);
-                break;
-            case 'Flip Horizontal':
-                flipObjects(option);
-                break;
-            case 'Delete':
-                diagram.remove();
-            case 'Send To Back':
-                diagram.sendToBack();
-                break;
-            case 'Bring To Front':
-                diagram.bringToFront();
-                break;
-            case 'Send Backward':
-                diagram.sendBackward();
-                break;
-            case 'Bring Forward':
-                diagram.moveForward();
-                break;
-            case 'Landscape':
-                args.item.parentObj.items[1].iconCss = '';
-                args.item.iconCss = 'sf-icon-check-tick';
-                diagram.pageSettings.orientation = 'Landscape';
-                document.getElementById('pageLandscape').classList.add('e-active');
-                document.getElementById('pagePortrait').classList.remove('e-active');
-                break;
-            case 'Portrait':
-                args.item.parentObj.items[0].iconCss = '';
-                args.item.iconCss = 'sf-icon-check-tick';
-                diagram.pageSettings.orientation = 'Portrait';
-                document.getElementById('pagePortrait').classList.add('e-active');
-                document.getElementById('pageLandscape').classList.remove('e-active');
-                break;
-            case 'Letter (8.5 in x 11 in)':
-            case 'Legal (8.5 in x 14 in)':
-            case 'A3 (297 mm x 420 mm)':
-            case 'A4 (210 mm x 297 mm)':
-            case 'A5 (148 mm x 210 mm)':
-            case 'A6 (105 mm x 148 mm)':
-            case 'Tabloid (279 mm x 432 mm)':
-                this.paperListChange(args)
-                pageSettingsList.text = args.item.text;
-                this.updateSelection(args.item)
-                break;
-            case 'Select All':
-                diagram.clearSelection();
-                diagram.selectAll();
-                break;
-            case 'Select All Nodes':
-                diagram.clearSelection();
-                diagram.select(diagram.nodes);
-                break;
-            case 'Select All Connectors':
-                diagram.clearSelection();
-                diagram.select(diagram.connectors);
-                break;
-            case 'Deselect All':
-                diagram.clearSelection();
-                break;
-            case 'Selection Tool':
-                diagram.tool = ej.diagrams.DiagramTools.Default;
-                this.removeSelectedToolbarItem();
-                break;
-            case 'Pan Tool':
-                diagram.clearSelection();
-                diagram.tool = ej.diagrams.DiagramTools.ZoomPan;
-                this.removeSelectedToolbarItem();
-                break;
-            case 'Show Lines':
-                diagram.snapSettings.constraints = diagram.snapSettings.constraints ^ ej.diagrams.SnapConstraints.ShowLines;
-                args.item.iconCss = args.item.iconCss ? '' : 'sf-icon-check-tick';
-                break;
-            case 'Snap To Grid':
-                diagram.snapSettings.constraints = diagram.snapSettings.constraints ^ ej.diagrams.SnapConstraints.SnapToLines;
-                args.item.iconCss = args.item.iconCss ? '' : 'sf-icon-check-tick';
-                break;
-            case 'Snap To Object':
-                diagram.snapSettings.constraints = diagram.snapSettings.constraints ^ ej.diagrams.SnapConstraints.SnapToObject;
-                args.item.iconCss = args.item.iconCss ? '' : 'sf-icon-check-tick';
-                break;
-            case 'Show Ruler':
-                args.item.iconCss = args.item.iconCss ? '' : 'sf-icon-check-tick';
-                diagram.rulerSettings.showRulers = !diagram.rulerSettings.showRulers;
-                break;
-            case 'Show Page Breaks':
-                args.item.iconCss = args.item.iconCss ? '' : 'sf-icon-check-tick';
-                diagram.pageSettings.showPageBreaks = !diagram.pageSettings.showPageBreaks;
-                showPageBreaks.checked = !showPageBreaks.checked;
-                break;
-            case 'Show Multiple page':
-                args.item.iconCss = args.item.iconCss ? '' : 'sf-icon-check-tick';
-                diagram.pageSettings.multiplePage = ! diagram.pageSettings.multiplePage;
-                break;
-            case 'Fit To Width':
-                diagram.fitToPage({mode:'Width'});
-                break;
-            case 'Fit To Page':
-                diagram.fitToPage({ mode: 'Page', region: 'Content'});
-                break;
-        }
-        if (option === 'Pan Tool') {
-            if (toolbarObj.items[3].cssClass.indexOf('tb-item-selected') === -1) {
-                toolbarObj.items[3].cssClass += ' tb-item-selected';
-            }
-        }
-       else if (option === 'Selection Tool') {
-            if (toolbarObj.items[4].cssClass.indexOf('tb-item-selected') === -1) {
-                toolbarObj.items[4].cssClass += ' tb-item-selected';
-            }
-        }
-        else if (option ===  'Orthogonal' || option === 'Straight' || option === 'Bezier') {
-            document.getElementById('conTypeBtn').classList.add('tb-item-selected');
-        }
-        diagram.dataBind();
-    };
      // To apply annotation style to selected Node.
      UtilityMethods.prototype.applyStyle = function (style) {
         let node = diagram.selectedItems.nodes[0];
@@ -563,6 +395,7 @@ var UtilityMethods = (function () {
         if(phoneText){
             phoneText.textContent = phoneNo.value;
         }
+        node.tooltip.content = getContent(node.data);
         editNodeDialog.hide();
     };
     UtilityMethods.prototype.btnPrintClick = function () {
@@ -602,7 +435,7 @@ var UtilityMethods = (function () {
     {
         for (var i = 0; i < toolbarObj.items.length; i++) {
             var item = toolbarObj.items[i];
-            if (item.cssClass.indexOf('tb-item-selected') !== -1 && item.tooltipText !=='Pan and Zoom') {
+            if (item.cssClass.indexOf('tb-item-selected') !== -1 && item.tooltipText !=='Overview') {
                 item.cssClass = item.cssClass.replace(' tb-item-selected', '');
             }
         }
@@ -637,10 +470,9 @@ var UtilityMethods = (function () {
              diagram.pageSettings.width = 1460;
              diagram.pageSettings.height = 600;
          }
-        //  this.updatePaperSelection(designContextMenu.items[1],args.value);
          diagram.dataBind();
      };
-         // To get paper size
+    // To get paper size
     UtilityMethods.prototype.getPaperSize = function(args)
     {
         var paperSize = new PaperSize();
@@ -728,194 +560,188 @@ var UtilityMethods = (function () {
     };
     UtilityMethods.prototype.removePicture = function(option){
         let id = diagram.selectedItems.nodes[0].data.Id;
-        let node = diagramData.find((item) => item.Id === id);
         let nodeObj = diagram.dataSourceSettings.dataSource.dataSource.json.find((obj) => obj.Id === id);
         var imageTag = document.getElementById( diagram.selectedItems.nodes[0].id+'_picimage');
         if(option === 'Delete'){
-            node.ImageUrl = '';
             nodeObj.ImageUrl = '';
             imageTag.href.baseVal = '';
         }else{
-            if (node.ImageUrl !== '') {
-                showHidePictures.push({ id: node.Id, imageUrl: node.ImageUrl });
-                node.ImageUrl = '';
+            if (nodeObj.ImageUrl !== '') {
+                showHidePictures.push({ id: nodeObj.Id, imageUrl: nodeObj.ImageUrl });
                 nodeObj.ImageUrl = '';
                 imageTag.href.baseVal = '';
               } else {
-                let obj = showHidePictures.find((item) => item.id === node.Id);
-                node.ImageUrl = obj ? obj.imageUrl : '';
+                let obj = showHidePictures.find((item) => item.id === nodeObj.Id);
                 nodeObj.ImageUrl = obj ? obj.imageUrl : '';
                 imageTag.href.baseVal = obj ? obj.imageUrl : '';
                 // Find the index of the object in showHidePictures
-                let index = showHidePictures.findIndex((item) => item.id === node.Id);
+                let index = showHidePictures.findIndex((item) => item.id === nodeObj.Id);
                 // If the object exists in showHidePictures, remove it using splice()
                 if (index !== -1) {
                   showHidePictures.splice(index, 1);
                 }
               }
         }
-        // diagram.dataBind();
-        // diagram.clear();
-        // diagram.refresh();
-        // diagram.fitToPage({ mode: 'Page', region: 'Content' });
     };
     UtilityMethods.prototype.changeShapeTemplates = function(args){
         let option = args.item.text;
-        currentShapeTemplate = option;
-        let fieldsList = document.getElementById('fieldsDropdown').ej2_instances[0];
-        let newValue = fieldsList.value;
-        diagram.setNodeTemplate = function(obj,diagram) {
-            let content = new ej.diagrams.StackPanel();
-            content.id = obj.id + '_outerstack';
-            content.orientation = 'Horizontal';
-            content.style.fill = obj.data.Fill;
-            content.style.strokeColor = obj.data.StrokeColor;
-            content.padding = { left: 5, right: 10, top: 5, bottom: 5 };
-        
-            // Add the line at the top of the outer stack
-            let line = new ej.diagrams.PathElement();
-            line.data = 'M0,0 L1,0'; // Line from (0,0) to (1,0)
-            line.width = 2;
-            line.height = 1;
-            line.style.strokeWidth = 2;
-            line.style.margin = { left: 20, right: 20, top: 20, bottom: 20 };
-            line.style.strokeColor = (obj.data).RatingColor;
-            line.horizontalAlignment = 'Stretch';
-            line.verticalAlignment = 'Top';
-            line.id = obj.id + '_line';
-        
-            let image = new ej.diagrams.ImageElement();
-            image.width = 50;
-            image.height = 50;
-            image.source = (obj.data).ImageUrl ? (obj.data).ImageUrl : '';
-            image.id = obj.id + '_pic';
-            image.style.strokeColor = 'transparent';
-            image.style.fill = 'transparent';
-        
-            let innerStack = new ej.diagrams.StackPanel();
-            innerStack.style.strokeColor = 'transparent';
-            innerStack.style.fill = 'transparent';
-            innerStack.margin = { left: 5, right: 0, top: 0, bottom: 0 };
-            innerStack.id = obj.id + '_innerstack';
-            let text;let desigText;let teamText;let eidText;let emailText;let phoneText;
-            let childElements = [line];
-           if(newValue.indexOf('Name') !== -1){
-                text = new ej.diagrams.TextElement();
-                text.content = (obj.data).Name;
-                text.style.color = obj.data.color;
-                text.style.bold = obj.data.IsBold;
-                text.style.italic = obj.data.IsItalic;
-                text.style.textDecoration = obj.data.Decoration;
-                text.style.fontSize = obj.data.FontSize;
-                text.style.fontFamily = obj.data.FontFamily;
-                text.style.strokeColor = 'none';
-                text.horizontalAlignment = 'Left';
-                text.style.fill = 'none';
-                text.id = obj.id + '_text1';
-                childElements.push(text);
-           }
-           if(newValue.indexOf('Desig') !== -1){
-                desigText = new ej.diagrams.TextElement();
-                desigText.margin = { left: 0, right: 0, top: 5, bottom: 0 };
-                desigText.content = (obj.data).Designation;
-                desigText.style.color = obj.data.color;
-                desigText.style.strokeColor = 'none';
-                desigText.style.fontSize = obj.data.FontSize;
-                desigText.style.fontFamily = obj.data.FontFamily;
-                desigText.style.bold = obj.data.IsBold;
-                desigText.style.italic = obj.data.IsItalic;
-                desigText.style.textDecoration = obj.data.Decoration;
-                desigText.style.fill = 'none';
-                desigText.horizontalAlignment = 'Left';
-                desigText.style.textWrapping = 'Wrap';
-                desigText.id = obj.id + '_desig';
-                childElements.push(desigText);
-           }
-           if(newValue.indexOf('Team') !== -1){
-                teamText = new ej.diagrams.TextElement();
-                teamText.margin = { left: 0, right: 0, top: 5, bottom: 0 };
-                teamText.content = (obj.data).Team;
-                teamText.style.color = obj.data.color;
-                teamText.style.strokeColor = 'none';
-                teamText.style.fontSize = obj.data.FontSize;
-                teamText.style.fontFamily = obj.data.FontFamily;
-                teamText.style.bold = obj.data.IsBold;
-                teamText.style.italic = obj.data.IsItalic;
-                teamText.style.textDecoration = obj.data.Decoration;
-                teamText.style.fill = 'none';
-                teamText.horizontalAlignment = 'Left';
-                teamText.style.textWrapping = 'Wrap';
-                teamText.id = obj.id + '_team';
-                childElements.push(teamText);
-           }
-           if(newValue.indexOf('EID') !== -1){
-                eidText = new ej.diagrams.TextElement();
-                eidText.margin = { left: 0, right: 0, top: 5, bottom: 0 };
-                eidText.content = (obj.data).EmployeeID;
-                eidText.style.color = obj.data.color;
-                eidText.style.strokeColor = 'none';
-                eidText.style.fontSize = obj.data.FontSize;
-                eidText.style.fontFamily = obj.data.FontFamily;
-                eidText.style.bold = obj.data.IsBold;
-                eidText.style.italic = obj.data.IsItalic;
-                eidText.style.textDecoration = obj.data.Decoration;
-                eidText.style.fill = 'none';
-                eidText.horizontalAlignment = 'Left';
-                eidText.style.textWrapping = 'Wrap';
-                eidText.id = obj.id + '_eid';
-                childElements.push(eidText);
-           }
-           if(newValue.indexOf('Email') !== -1){
-                emailText = new ej.diagrams.TextElement();
-                emailText.margin = { left: 0, right: 0, top: 5, bottom: 0 };
-                emailText.content = (obj.data).EmailId;
-                emailText.style.color = obj.data.color;
-                emailText.style.strokeColor = 'none';
-                emailText.style.fontSize = obj.data.FontSize;
-                emailText.style.fontFamily = obj.data.FontFamily;
-                emailText.style.bold = obj.data.IsBold;
-                emailText.style.italic = obj.data.IsItalic;
-                emailText.style.textDecoration = obj.data.Decoration;
-                emailText.style.fill = 'none';
-                emailText.horizontalAlignment = 'Left';
-                emailText.style.textWrapping = 'Wrap';
-                emailText.id = obj.id + '_email';
-                childElements.push(emailText);
-           }
-           if(newValue.indexOf('Phone') !== -1){
-                phoneText = new ej.diagrams.TextElement();
-                phoneText.margin = { left: 0, right: 0, top: 5, bottom: 0 };
-                phoneText.content = (obj.data).PhoneNumber;
-                phoneText.style.color = obj.data.color;
-                phoneText.style.strokeColor = 'none';
-                phoneText.style.fontSize = obj.data.FontSize;
-                phoneText.style.fontFamily = obj.data.FontFamily;
-                phoneText.style.bold = obj.data.IsBold;
-                phoneText.style.italic = obj.data.IsItalic;
-                phoneText.style.textDecoration = obj.data.Decoration;
-                phoneText.style.fill = 'none';
-                phoneText.horizontalAlignment = 'Left';
-                phoneText.style.textWrapping = 'Wrap';
-                phoneText.id = obj.id + '_phone';
-                childElements.push(phoneText);
-           }
-        
-            innerStack.children = childElements;
-            if(option === 'No image'){
-                content.children = [innerStack];
-            }else if(option === 'Image at left'){
+        if(option !== currentShapeTemplate){
+            currentShapeTemplate = option;
+            let fieldsList = document.getElementById('fieldsDropdown').ej2_instances[0];
+            let newValue = fieldsList.value;
+            diagram.setNodeTemplate = function(obj,diagram) {
+                let content = new ej.diagrams.StackPanel();
+                content.id = obj.id + '_outerstack';
+                content.orientation = 'Horizontal';
+                content.style.fill = obj.data.Fill;
+                content.style.strokeColor = obj.data.StrokeColor;
+                content.padding = { left: 5, right: 10, top: 5, bottom: 5 };
+            
+                // Add the line at the top of the outer stack
+                let line = new ej.diagrams.PathElement();
+                line.data = 'M0,0 L1,0'; // Line from (0,0) to (1,0)
+                line.width = 2;
+                line.height = 1;
+                line.style.strokeWidth = 2;
+                line.style.margin = { left: 20, right: 20, top: 20, bottom: 20 };
+                line.style.strokeColor = (obj.data).RatingColor;
+                line.horizontalAlignment = 'Stretch';
+                line.verticalAlignment = 'Top';
+                line.id = obj.id + '_line';
+            
+                let image = new ej.diagrams.ImageElement();
+                image.width = 50;
+                image.height = 50;
+                image.source = (obj.data).ImageUrl ? (obj.data).ImageUrl : '';
+                image.id = obj.id + '_pic';
+                image.style.strokeColor = 'transparent';
+                image.style.fill = 'transparent';
+            
+                let innerStack = new ej.diagrams.StackPanel();
+                innerStack.style.strokeColor = 'transparent';
+                innerStack.style.fill = 'transparent';
+                innerStack.margin = { left: 5, right: 0, top: 0, bottom: 0 };
+                innerStack.id = obj.id + '_innerstack';
+                let text;let desigText;let teamText;let eidText;let emailText;let phoneText;
+                let childElements = [line];
+            if(newValue.indexOf('Name') !== -1){
+                    text = new ej.diagrams.TextElement();
+                    text.content = (obj.data).Name;
+                    text.style.color = obj.data.color;
+                    text.style.bold = obj.data.IsBold;
+                    text.style.italic = obj.data.IsItalic;
+                    text.style.textDecoration = obj.data.Decoration;
+                    text.style.fontSize = obj.data.FontSize;
+                    text.style.fontFamily = obj.data.FontFamily;
+                    text.style.strokeColor = 'none';
+                    text.horizontalAlignment = 'Left';
+                    text.style.fill = 'none';
+                    text.id = obj.id + '_text1';
+                    childElements.push(text);
+            }
+            if(newValue.indexOf('Desig') !== -1){
+                    desigText = new ej.diagrams.TextElement();
+                    desigText.margin = { left: 0, right: 0, top: 5, bottom: 0 };
+                    desigText.content = (obj.data).Designation;
+                    desigText.style.color = obj.data.color;
+                    desigText.style.strokeColor = 'none';
+                    desigText.style.fontSize = obj.data.FontSize;
+                    desigText.style.fontFamily = obj.data.FontFamily;
+                    desigText.style.bold = obj.data.IsBold;
+                    desigText.style.italic = obj.data.IsItalic;
+                    desigText.style.textDecoration = obj.data.Decoration;
+                    desigText.style.fill = 'none';
+                    desigText.horizontalAlignment = 'Left';
+                    desigText.style.textWrapping = 'Wrap';
+                    desigText.id = obj.id + '_desig';
+                    childElements.push(desigText);
+            }
+            if(newValue.indexOf('Team') !== -1){
+                    teamText = new ej.diagrams.TextElement();
+                    teamText.margin = { left: 0, right: 0, top: 5, bottom: 0 };
+                    teamText.content = (obj.data).Team;
+                    teamText.style.color = obj.data.color;
+                    teamText.style.strokeColor = 'none';
+                    teamText.style.fontSize = obj.data.FontSize;
+                    teamText.style.fontFamily = obj.data.FontFamily;
+                    teamText.style.bold = obj.data.IsBold;
+                    teamText.style.italic = obj.data.IsItalic;
+                    teamText.style.textDecoration = obj.data.Decoration;
+                    teamText.style.fill = 'none';
+                    teamText.horizontalAlignment = 'Left';
+                    teamText.style.textWrapping = 'Wrap';
+                    teamText.id = obj.id + '_team';
+                    childElements.push(teamText);
+            }
+            if(newValue.indexOf('EID') !== -1){
+                    eidText = new ej.diagrams.TextElement();
+                    eidText.margin = { left: 0, right: 0, top: 5, bottom: 0 };
+                    eidText.content = (obj.data).EmployeeID;
+                    eidText.style.color = obj.data.color;
+                    eidText.style.strokeColor = 'none';
+                    eidText.style.fontSize = obj.data.FontSize;
+                    eidText.style.fontFamily = obj.data.FontFamily;
+                    eidText.style.bold = obj.data.IsBold;
+                    eidText.style.italic = obj.data.IsItalic;
+                    eidText.style.textDecoration = obj.data.Decoration;
+                    eidText.style.fill = 'none';
+                    eidText.horizontalAlignment = 'Left';
+                    eidText.style.textWrapping = 'Wrap';
+                    eidText.id = obj.id + '_eid';
+                    childElements.push(eidText);
+            }
+            if(newValue.indexOf('Email') !== -1){
+                    emailText = new ej.diagrams.TextElement();
+                    emailText.margin = { left: 0, right: 0, top: 5, bottom: 0 };
+                    emailText.content = (obj.data).EmailId;
+                    emailText.style.color = obj.data.color;
+                    emailText.style.strokeColor = 'none';
+                    emailText.style.fontSize = obj.data.FontSize;
+                    emailText.style.fontFamily = obj.data.FontFamily;
+                    emailText.style.bold = obj.data.IsBold;
+                    emailText.style.italic = obj.data.IsItalic;
+                    emailText.style.textDecoration = obj.data.Decoration;
+                    emailText.style.fill = 'none';
+                    emailText.horizontalAlignment = 'Left';
+                    emailText.style.textWrapping = 'Wrap';
+                    emailText.id = obj.id + '_email';
+                    childElements.push(emailText);
+            }
+            if(newValue.indexOf('Phone') !== -1){
+                    phoneText = new ej.diagrams.TextElement();
+                    phoneText.margin = { left: 0, right: 0, top: 5, bottom: 0 };
+                    phoneText.content = (obj.data).PhoneNumber;
+                    phoneText.style.color = obj.data.color;
+                    phoneText.style.strokeColor = 'none';
+                    phoneText.style.fontSize = obj.data.FontSize;
+                    phoneText.style.fontFamily = obj.data.FontFamily;
+                    phoneText.style.bold = obj.data.IsBold;
+                    phoneText.style.italic = obj.data.IsItalic;
+                    phoneText.style.textDecoration = obj.data.Decoration;
+                    phoneText.style.fill = 'none';
+                    phoneText.horizontalAlignment = 'Left';
+                    phoneText.style.textWrapping = 'Wrap';
+                    phoneText.id = obj.id + '_phone';
+                    childElements.push(phoneText);
+            }
+            
+                innerStack.children = childElements;
+                if(option === 'No image'){
+                    content.children = [innerStack];
+                }else if(option === 'Image at left'){
+                    content.children = [image, innerStack];
+                }
+                else{
+                content.orientation = 'Vertical';
                 content.children = [image, innerStack];
-            }
-            else{
-               content.orientation = 'Vertical';
-               content.children = [image, innerStack];
-            }
-            return content;
-        };
-        diagram.dataBind();
-        diagram.clear();
-        diagram.refresh();
-        diagram.fitToPage({ mode: 'Page', region: 'Content' });
+                }
+                return content;
+            };
+            diagram.dataBind();
+            diagram.clear();
+            diagram.refresh();
+            diagram.fitToPage({ mode: 'Page', region: 'Content' });
+        }
     };
     UtilityMethods.prototype.changeFields = function(args){
         let newValue = args.value;
