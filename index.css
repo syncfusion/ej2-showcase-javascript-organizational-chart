@@ -86,7 +86,7 @@
         .property-panel-content{
             margin-left: 15px;
         }
-    #pictureDropdown{
+    #pictureDropdown , #addAssistantBtn{
         opacity: 0.5;
         pointer-events: none;
     }
@@ -117,7 +117,7 @@
         margin-top: -4px!important;
         border: #e3e3e3;
     }
-    .item-singleSelect{
+    .item-singleSelect, .item-singleSelectColor{
         pointer-events: none;
         opacity: 0.5;
     }

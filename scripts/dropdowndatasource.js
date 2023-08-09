@@ -20,12 +20,12 @@ var DropDownDataSources = (function () {
             { prefixIcon: 'sf-icon-underline tb-icons', tooltipText: 'Underline', cssClass:'tb-item-end item-singleSelect' },
                         { type: 'Separator' },
             { prefixIcon: 'sf-icon-text tb-icons',template: '<input type="color" class="color-font" id="fontColorBtn" style="width:100%;"/>', tooltipText: 'Font Color',cssClass:'tb-item-start item-singleSelect'},
-            { prefixIcon: 'sf-icon-fill tb-icons',template: '<input type="color" class="color-fill" id="fillColorBtn" style="width:100%;"/>', tooltipText: 'Fill Color',cssClass:'tb-item-middle item-singleSelect'},
-            { prefixIcon: 'sf-icon-stroke tb-icons',template: '<input type="color" class="color-stroke" id="strokeColorBtn" style="width:100%;"/>', tooltipText: 'Stroke Color',cssClass:'tb-item-end item-singleSelect'},
+            { prefixIcon: 'sf-icon-fill tb-icons',template: '<input type="color" class="color-fill" id="fillColorBtn" style="width:100%;"/>', tooltipText: 'Fill Color',cssClass:'tb-item-middle item-singleSelectColor'},
+            { prefixIcon: 'sf-icon-stroke tb-icons',template: '<input type="color" class="color-stroke" id="strokeColorBtn" style="width:100%;"/>', tooltipText: 'Stroke Color',cssClass:'tb-item-end item-singleSelectColor'},
                             { type: 'Separator' },
             { prefixIcon: 'sf-icon-pointer', tooltipText: 'Select Tool',cssClass:'tb-item-start tb-item-selected'},
             { prefixIcon: 'sf-icon-pan', tooltipText: 'Pan Tool',cssClass:'tb-item-middle'},
-            { prefixIcon: 'sf-icon-zoom-in', tooltipText: 'Overview',cssClass:'tb-item-end '},
+            { prefixIcon: 'db-overview', tooltipText: 'Overview',cssClass:'tb-item-end db-overview'}
 
         ];
         return items;
@@ -92,34 +92,6 @@ var DropDownDataSources = (function () {
             ]
             return items;
     };
-    DropDownDataSources.prototype.getEditMenuItems = function()
-    {
-        var items = [
-            { text: 'Undo', iconCss: 'sf-icon-undo' },
-            { text: 'Redo', iconCss: 'sf-icon-redo' },
-            { separator: true },
-            { text: 'Cut', iconCss: 'sf-icon-cut' },
-            { text: 'Copy', iconCss: 'sf-icon-copy' },
-            { text: 'Paste', iconCss: 'sf-icon-paste' },
-            { separator: true },
-            { text: 'Rotate',iconCss:'sf-icon-rotate', items:[
-                { text: 'Rotate Right 90', iconCss: 'sf-icon-rotate-clockwise' },
-                { text: 'Rotate Left 90', iconCss: 'sf-icon-rotate-counter-clockwise' },
-                { text: 'Flip Vertical', iconCss: 'sf-icon-flip-vertical' },
-                { text: 'Flip Horizontal', iconCss: 'sf-icon-flip-horizontal' },
-            ]},
-            { text: 'Delete', iconCss: 'sf-icon-delete' },
-            { separator: true },
-            {text: 'Order Commands',iconCss:'sf-icon-Order',
-                items:[ { text: 'Bring Forward', iconCss: 'sf-icon-bring-forward' },
-                        { text: 'Bring To Front', iconCss: 'sf-icon-bring-to-front' },
-                        { text: 'Send Backward', iconCss: 'sf-icon-send-backward' },
-                        { text: 'Send To Back', iconCss: 'sf-icon-send-to-back' },
-                        ]
-            } 
-        ]
-        return items;
-    };
     DropDownDataSources.prototype.getDesignMenuItems = function()
     {
         var items = [
@@ -135,20 +107,6 @@ var DropDownDataSources = (function () {
         ]
         return items;
     };
-    DropDownDataSources.prototype.getToolsMenuItems = function()
-    {
-        var items1 = [
-            { text: 'Selection Tool',iconCss: 'sf-icon-pointer' },
-            { text: 'Pan Tool', iconCss: 'sf-icon-Pan tb-icons' },
-            { separator: true },
-            { text: 'Connector Tool',iconCss:'sf-icon-orthogonal_line',items:[
-                {text:'Straight',iconCss: 'sf-icon-straight_line'},
-                {text:'Orthogonal',iconCss: 'sf-icon-orthogonal_line'},
-                {text:'Bezier',iconCss: 'sf-icon-bezier'},
-            ] }
-        ]
-        return items1;
-    };
     DropDownDataSources.prototype.getSelectMenuItems = function()
     {
         var items = [
@@ -163,10 +121,9 @@ var DropDownDataSources = (function () {
     {
         var items = [
             { text: 'Show Lines',iconCss: ''},
-            { text: 'Snap To Grid',iconCss : 'sf-icon-check-tick'},
+            { text: 'Snap To Grid',iconCss : ''},
             { text: 'Snap To Object',iconCss : 'sf-icon-check-tick'},
             { text: 'Show Ruler',iconCss: 'sf-icon-check-tick'},
-            // { text: 'Show Page Breaks',iconCss: ''},
             { separator: true },
             { text: 'Fit To Width'},
             { text: 'Fit To Page'},

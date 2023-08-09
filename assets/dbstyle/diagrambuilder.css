@@ -169,6 +169,28 @@ input, button, select, textarea {
     height:calc(100% - 28px);
 }
 
+.db-overview {
+    float: left;
+    height: 100%;
+    cursor: pointer;
+}
+
+.db-overview span {
+    font-size: 18px;
+    text-align: center;
+    background-image: url('./common_images/Overview - Normal.svg');
+    background-repeat: no-repeat;
+    width: 20px !important;
+    height: 16px;
+    margin: 6px 0px;
+    display: block;
+    pointer-events: none;
+}
+
+.db-overview.active span {
+    background-image: url('./common_images/Overview.svg');
+}
+
 .sidebar.show-overview .db-palette-parent {
     height:calc(100% );
 }

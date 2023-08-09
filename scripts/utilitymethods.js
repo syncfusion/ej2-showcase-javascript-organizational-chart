@@ -47,11 +47,11 @@ var UtilityMethods = (function () {
                 if(position === 'absolute'){
                     document.getElementById('overview-container').style.position = '';
                     document.getElementById('overview-container').style.zIndex = "-1";
-                    args.item.cssClass = args.item.cssClass.replace('tb-item-selected','');
+                    args.item.cssClass = args.item.cssClass.replace('active','');
                 }else{
                     document.getElementById('overview-container').style.position = "absolute";
                     document.getElementById('overview-container').style.zIndex = "1000";
-                    args.item.cssClass += ' tb-item-selected';
+                    args.item.cssClass += ' active';
                     let overview = document.getElementById('overview').ej2_instances[0];
                     overview.refresh();
                 }
@@ -328,12 +328,14 @@ var UtilityMethods = (function () {
         });
             diagram.select([matchingNodes[currentIndex]]);
     };
+    // To get the next node in search
     UtilityMethods.prototype.btnNextClick = function(args){
         if(matchingNodes.length > 0){
             currentIndex = (currentIndex + 1) % matchingNodes.length; 
             diagram.select([matchingNodes[currentIndex]]);
         }
     };
+    // To get the previous node in search
     UtilityMethods.prototype.btnPrevClick = function(args){
         if(matchingNodes.length > 0){
             currentIndex = (currentIndex - 1 + matchingNodes.length) % matchingNodes.length; 
@@ -398,6 +400,7 @@ var UtilityMethods = (function () {
         node.tooltip.content = getContent(node.data);
         editNodeDialog.hide();
     };
+    // To print the diagram.
     UtilityMethods.prototype.btnPrintClick = function () {
         let options = {};
         options.region = document.getElementById("printRegionDropdown").ej2_instances[0].value;
@@ -583,6 +586,7 @@ var UtilityMethods = (function () {
               }
         }
     };
+    // To change node template.
     UtilityMethods.prototype.changeShapeTemplates = function(args){
         let option = args.item.text;
         if(option !== currentShapeTemplate){
@@ -735,6 +739,11 @@ var UtilityMethods = (function () {
                 content.orientation = 'Vertical';
                 content.children = [image, innerStack];
                 }
+                let fields = document.getElementById("fieldsDropdown").ej2_instances[0];
+                if(option === 'No image' && fields.value.length === 0){
+                    content.width = 100;
+                    content.height = 50;
+                }
                 return content;
             };
             diagram.dataBind();
@@ -743,6 +752,7 @@ var UtilityMethods = (function () {
             diagram.fitToPage({ mode: 'Page', region: 'Content' });
         }
     };
+    // To change the fields of the node
     UtilityMethods.prototype.changeFields = function(args){
         let newValue = args.value;
         let option = currentShapeTemplate;
@@ -892,6 +902,13 @@ var UtilityMethods = (function () {
                content.orientation = 'Vertical';
                content.children = [image, innerStack];
             }
+            if(args.value.length === 0){
+
+                if(option === 'No image'){
+                    content.width = 100;
+                    content.height = 50;
+                }
+            }
         
             return content;
         };
@@ -900,13 +917,15 @@ var UtilityMethods = (function () {
         diagram.refresh();
         diagram.fitToPage({mode:'Page',region:'Content'});
     };
+    // To modify the zoom value of diagram.
     UtilityMethods.prototype.zoomChange = function (args) {
-        // debugger;
-        var zoom = {};
-        zoom.zoomFactor = ((args.value/100) / diagram.scrollSettings.currentZoom) - 1;
-        diagram.zoomTo(zoom);
-        document.getElementById('zoomSliderText').value = args.value.toString() + '%';
-        diagram.dataBind();
+        if(args.isInteracted){
+            var zoom = {};
+            zoom.zoomFactor = ((args.value/100) / diagram.scrollSettings.currentZoom) - 1;
+            diagram.zoomTo(zoom);
+            document.getElementById('zoomSliderText').value = args.value.toString() + '%';
+            diagram.dataBind();
+        }
     };
      return UtilityMethods;
 }());

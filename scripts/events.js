@@ -6,13 +6,13 @@ var DiagramClientSideEvents = (function () {
             if(args.state === 'Changed'){
                 if(args.newValue.length > 0){
                   this.applyFillColor(args.newValue);
-                  this.enablePictureDropdown();
+                  this.enableItems();
                 }
                 if(args.oldValue.length > 0 && (args.newValue.length === 0 || args.oldValue[0].id !== args.newValue[0].id)){
                     this.removeFillColor(args.oldValue);
                 }
                 if(args.newValue.length === 0){
-                    this.disablePictureDropdown();
+                    this.disableItems();
                 }
             }
     };
@@ -49,20 +49,38 @@ var DiagramClientSideEvents = (function () {
                 break;
         }
     };
-    DiagramClientSideEvents.prototype.enablePictureDropdown = function () {
-        let pictureDropdown = document.getElementById('pictureDropdown');
-        pictureDropdown.style.cssText = 'pointer-events: auto !important; opacity:1';
-        let tbItems = document.getElementsByClassName('item-singleSelect');
-        for (var i = 0; i < tbItems.length; i++) {
-            tbItems[i].style.cssText = 'pointer-events: auto !important; opacity:1';
+    // To enable items when we select node.
+    DiagramClientSideEvents.prototype.enableItems = function () {
+        if(currentShapeTemplate !== 'No image'){
+            let pictureDropdown = document.getElementById('pictureDropdown');
+            pictureDropdown.style.cssText = 'pointer-events: auto !important; opacity:1';
+        }
+        let assistantBtn = document.getElementById('addAssistantBtn');
+        assistantBtn.style.cssText = 'pointer-events: auto !important; opacity:1; font-size:10px';
+        if(fieldsList.value.length > 0){
+            let tbItems = document.getElementsByClassName('item-singleSelect');
+            for (var i = 0; i < tbItems.length; i++) {
+                tbItems[i].style.cssText = 'pointer-events: auto !important; opacity:1';
+            }
+        }
+        let colorItems = document.getElementsByClassName('item-singleSelectColor');
+        for(var i = 0; i < colorItems.length; i++){
+            colorItems[i].style.cssText = 'pointer-events: auto !important; opacity:1';
         }
     };
-    DiagramClientSideEvents.prototype.disablePictureDropdown = function () {
+    // To disable itmes when there is no selection
+    DiagramClientSideEvents.prototype.disableItems = function () {
         let pictureDropdown = document.getElementById('pictureDropdown');
         pictureDropdown.style.cssText = 'pointer-events: none !important; opacity:0.5';
+        let assistantBtn = document.getElementById('addAssistantBtn');
+        assistantBtn.style.cssText = 'pointer-events: none !important; opacity:0.5; font-size:10px';
         let tbItems = document.getElementsByClassName('item-singleSelect');
         for (var i = 0; i < tbItems.length; i++) {
             tbItems[i].style.cssText = 'pointer-events: none !important; opacity:0.5';
+        }
+        let colorItems = document.getElementsByClassName('item-singleSelectColor');
+        for(var i = 0; i < colorItems.length; i++){
+            colorItems[i].style.cssText = 'pointer-events: none !important; opacity:0.5';
         }
     };
     DiagramClientSideEvents.prototype.addChild = function (args) {
@@ -118,6 +136,14 @@ var DiagramClientSideEvents = (function () {
         }
         if (diagram.historyManager.redoStack.length > 0) {
             toolbarContainer.classList.add('db-redo');
+        }
+    };
+    // To update the zoom slider value based on diagram zoom
+    DiagramClientSideEvents.prototype.scrollChange = function (args) {
+        if(args.panState === 'Progress'){
+           var zoomValue = parseFloat(args.source.scrollSettings.currentZoom.toFixed(1));
+           zoomSlider.value = zoomValue * 100;
+           document.getElementById('zoomSliderText').value = Math.round(zoomSlider.value) + '%';
         }
     };
         return DiagramClientSideEvents;

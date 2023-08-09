@@ -163,11 +163,12 @@ var diagram = new ej.diagrams.Diagram({
     } },
     constraints: ej.diagrams.DiagramConstraints.Default | ej.diagrams.DiagramConstraints.InheritTooltip,
     rulerSettings:{showRulers:true},
-    snapSettings:{constraints:ej.diagrams.SnapConstraints.All &~ ej.diagrams.SnapConstraints.ShowLines},
+    snapSettings:{constraints:ej.diagrams.SnapConstraints.All &~ (ej.diagrams.SnapConstraints.ShowLines) &~ (ej.diagrams.SnapConstraints.SnapToLines)},
     pageSettings: {
         background: { color: '#FFFFFF' },margin: { left: 5, top: 5 },
         orientation: 'Landscape',showPageBreaks:false,multiplePage : false
     },
+    tool: ej.diagrams.DiagramTools.Default &~ ej.diagrams.DiagramTools.MultipleSelect,
     dataSourceSettings: {  id: 'Id', parentId: 'ReportingPerson', dataSource: items},
     getNodeDefaults: (obj) => {
         obj.height = 50;
@@ -274,10 +275,12 @@ var diagram = new ej.diagrams.Diagram({
     
         return content;
     },
+    scrollSettings:{minZoom: 0.3, maxZoom: 3.2},
     selectedItems: { constraints: ej.diagrams.SelectorConstraints.All | ej.diagrams.SelectorConstraints.userHandle, userHandles: userHandle },
     selectionChange: function (args) { DiagramClientSideEvents.prototype.selectionChange(args); },
     onUserHandleMouseDown: function (args) { DiagramClientSideEvents.prototype.onUserHandleMouseDown(args); },
     historyChange: function (args) { DiagramClientSideEvents.prototype.historyChange(args); },
+    scrollChange: function (args) { DiagramClientSideEvents.prototype.scrollChange(args); },
     created: function () {
         diagram.fitToPage({ mode: 'Page', region: 'Content'});
         document.getElementById('zoomSliderText').value = Math.round(diagram.scrollSettings.currentZoom * 100) + '%';
@@ -292,7 +295,7 @@ overview.appendTo('#overview');
 document.getElementById("toggleOverviewButton").onclick = () =>{
     document.getElementById('overview-container').style.position = '';
     document.getElementById('overview-container').style.zIndex = '-1';
-    toolbarObj.items[toolbarObj.items.length - 1].cssClass = toolbarObj.items[toolbarObj.items.length - 1].cssClass.replace('tb-item-selected', '');
+    toolbarObj.items[toolbarObj.items.length - 1].cssClass = toolbarObj.items[toolbarObj.items.length - 1].cssClass.replace('active', '');
 };
 function renameDiagram(args) {
     document.getElementsByClassName('db-diagram-name-container')[0].classList.add('db-edit-name');
@@ -362,6 +365,8 @@ toolbarObj.appendTo('#toolbarEditor');
 // Initialize slider component for zooming operation
 var zoomSlider = new ej.inputs.Slider({
    value : diagram.scrollSettings.currentZoom * 100,
+   max:300,
+   min:30,
    type: 'MinRange',
    change: function (args) { UtilityMethods.prototype.zoomChange(args) },
 });
@@ -415,8 +420,8 @@ strokeColorBtn.appendTo('#strokeColorBtn');
 // Initialize numeric text box component for horizontal spacing
 var horizontalSpacing = new ej.inputs.NumericTextBox({
     value: 30,
-    min: 5,
-    max: 200,
+    min: 30,
+    max: 100,
     format:'n',
     step: 1,
     change: function () {
@@ -429,8 +434,8 @@ horizontalSpacing.appendTo('#hSpacing');
 // Initialize numeric text box component for vertical spacing
 var verticalSpacing = new ej.inputs.NumericTextBox({
     value: 30,
-    min: 5,
-    max: 200,
+    min: 30,
+    max: 100,
     format:'n',
     step: 1,
     change: function () {
