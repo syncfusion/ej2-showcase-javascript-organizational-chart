@@ -1,6 +1,7 @@
 var DropDownDataSources = (function () {
     function DropDownDataSources() {
     };
+    // Toolbar items.
     DropDownDataSources.prototype.toolbarItems = function()
     {
         let items = [
@@ -30,6 +31,7 @@ var DropDownDataSources = (function () {
         ];
         return items;
     };
+    // Font family list.
     DropDownDataSources.prototype.fontFamilyList = function(){
         var items = [
             { text: 'Arial', value: 'Arial,Helvetica,sans-serif' },
@@ -45,6 +47,7 @@ var DropDownDataSources = (function () {
         ];
         return items;
     };
+    // Font size list.
     DropDownDataSources.prototype.fontSizeList = function(){
         var items = [
             { text: '8', value: '8pt' },
@@ -63,6 +66,7 @@ var DropDownDataSources = (function () {
         ];
         return items;
     };
+    // Diagram regions for print and exporting.
     DropDownDataSources.prototype.diagramRegions = function()
     {
         var diagramRegions = [
@@ -70,6 +74,7 @@ var DropDownDataSources = (function () {
         ];
         return diagramRegions;
     };
+    // Export image formats.
     DropDownDataSources.prototype.fileFormats = function()
     {
         var fileFormats = [
@@ -78,6 +83,7 @@ var DropDownDataSources = (function () {
         ];
         return fileFormats;
     };
+    // Returns File menu items.
     DropDownDataSources.prototype.getFileMenuItems = function()
     {
             var items = [
@@ -92,6 +98,7 @@ var DropDownDataSources = (function () {
             ]
             return items;
     };
+    // Returns design menu items.
     DropDownDataSources.prototype.getDesignMenuItems = function()
     {
         var items = [
@@ -107,16 +114,7 @@ var DropDownDataSources = (function () {
         ]
         return items;
     };
-    DropDownDataSources.prototype.getSelectMenuItems = function()
-    {
-        var items = [
-            { text: 'Select All', iconCss: 'em-icons e-cut' },
-            { text: 'Select All Nodes', iconCss: 'em-icons e-copy' },
-            { text: 'Select All Connectors', iconCss: 'em-icons e-paste' },
-            { text: 'Deselect All', iconCss: 'em-icons e-paste' }
-        ]
-        return items;
-    };
+    // Returns View menu items.
     DropDownDataSources.prototype.getViewMenuItems = function()
     {
         var items = [
@@ -130,6 +128,7 @@ var DropDownDataSources = (function () {
         ]
         return items;
     };
+    // Returns paper list with size value.
     DropDownDataSources.prototype.paperList1 = function()
     {
         var paperList1 = [
@@ -140,6 +139,7 @@ var DropDownDataSources = (function () {
         ];
         return paperList1;
     };
+    // Picture dropdown items.
     DropDownDataSources.prototype.pictureItems = function(){
         var items = [
             { text: 'Insert',  },
@@ -149,6 +149,7 @@ var DropDownDataSources = (function () {
         ];
         return items;
     };
+    // Node shape template with image alignment.
     DropDownDataSources.prototype.shapeTemplatesItems = function(){
         var items = [
             {text: 'Image at top',  },
@@ -157,6 +158,7 @@ var DropDownDataSources = (function () {
         ];
         return items;
     };
+    // Fields multi-selection dropdown items.
     DropDownDataSources.prototype.fieldsListItems = function(){
         var items = [
             {Name: 'Name',Code:'Name'},
@@ -168,6 +170,7 @@ var DropDownDataSources = (function () {
         ];
         return items;
     };
+    //Provides a list of search criteria for a search dialog.
     DropDownDataSources.prototype.searchDropDownItems = function(){
         var items = [
             { text: 'Name', value: 'Name' },

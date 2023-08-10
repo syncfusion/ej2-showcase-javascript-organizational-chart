@@ -1,9 +1,9 @@
-ej.diagrams.Diagram.Inject(ej.diagrams.DataBinding, ej.diagrams.HierarchicalTree,ej.diagrams.UndoRedo,ej.diagrams.PrintAndExport,ej.diagrams.DiagramContextMenu);
+ej.diagrams.Diagram.Inject(ej.diagrams.DataBinding, ej.diagrams.OrganizationalChart,ej.diagrams.UndoRedo,ej.diagrams.PrintAndExport,ej.diagrams.DiagramContextMenu);
 
 var dropDownDataSources = new DropDownDataSources();
 var diagramEvents = new DiagramClientSideEvents();
 var utilityMethods = new UtilityMethods();
-
+   // Data source for the layout.
     var data =[
         {
             "Fill":"white","StrokeColor":"black","FontFamily":"Arial","IsBold":false,"IsItalic":false,"Decoration":"None","FontSize":12,"color":"black","Id": "parent", "Name": "Maria Anders", "Designation": "Managing Director",
@@ -138,7 +138,7 @@ var utilityMethods = new UtilityMethods();
            "IsExpand": "None",
             "RatingColor": "#D46E89", "ReportingPerson": 89,"ImageUrl":'./images/helen.png', "EmployeeID":'SYNC1044',"Team":"Angular","EmailId":'horst.kloss@gmail.com',"PhoneNumber":'0324 - 1819344'},
     ];
-
+ // To get the node userhandle.
     var userHandle = [
         {
             name: 'Add New Child',pathData: 'M13.55896,0L18.461914,0 18.461914,13.557983 32,13.557983 32,18.481018 18.5,18.481018 18.5,32 13.55896,32 13.55896,18.481018 0,18.481018 0,13.557983 13.55896,13.557983z',
@@ -154,6 +154,7 @@ var currentShapeTemplate = 'Image at left';
 let matchingNodes = [];
 let currentIndex = 0; 
 var items = new ej.data.DataManager(data , new ej.data.Query().take(5));
+// Diagram initialization.
 var diagram = new ej.diagrams.Diagram({
     width: '100%', height: '100%',
     layout: { type: 'OrganizationalChart',getLayoutInfo: (node, options) => {
@@ -287,16 +288,18 @@ var diagram = new ej.diagrams.Diagram({
     }
 });
 diagram.appendTo('#diagram');
+// Overview initialization.
 var options = {};
 options.sourceID = 'diagram';
 overview = new ej.diagrams.Overview(options);
 overview.appendTo('#overview');
-
+// To close the overview when we click the close button.
 document.getElementById("toggleOverviewButton").onclick = () =>{
     document.getElementById('overview-container').style.position = '';
     document.getElementById('overview-container').style.zIndex = '-1';
     toolbarObj.items[toolbarObj.items.length - 1].cssClass = toolbarObj.items[toolbarObj.items.length - 1].cssClass.replace('active', '');
 };
+// To rename diagram.
 function renameDiagram(args) {
     document.getElementsByClassName('db-diagram-name-container')[0].classList.add('db-edit-name');
     var element = document.getElementById('diagramEditable');
@@ -304,20 +307,20 @@ function renameDiagram(args) {
     element.focus();
     element.select();
 };
-
+// Event handler triggered when the diagram name is changed.
 function diagramNameKeyDown(args) {
     if (args.which === 13) {
         document.getElementById('diagramName').innerHTML = document.getElementById('diagramEditable').value;
         document.getElementsByClassName('db-diagram-name-container')[0].classList.remove('db-edit-name');
     }
 };
-
+// Used to change the name of the diagram.
 function diagramNameChange(args) {
     document.getElementById('diagramName').innerHTML = document.getElementById('diagramEditable').value;
     document.getElementsByClassName('db-diagram-name-container')[0].classList.remove('db-edit-name');
     document.getElementById("exportfileName").value = document.getElementById('diagramName').innerHTML;
 };
-
+// To get the tooltip content of node.
 function getContent(obj) {
     var tooltipContent = document.createElement('div');
     tooltipContent.innerHTML = `
@@ -576,7 +579,7 @@ var shapeTemplates = new ej.splitbuttons.DropDownButton({
     items: DropDownDataSources.prototype.shapeTemplatesItems(),
     content:'Templates',
     iconCss:'e-icons e-properties-2',
-    select: function (args) { UtilityMethods.prototype.changeShapeTemplates(args) },
+    select: function (args) { UtilityMethods.prototype.modifyNodeTemplate(args) },
 });
 shapeTemplates.appendTo('#shapeTemplatesDropDown');
 
@@ -599,7 +602,7 @@ var fieldsList = new ej.dropdowns.MultiSelect({
     // set the MultiSelect popup height
     popupHeight: '350px',
     // select: function (args) { UtilityMethods.prototype.changeFields(args) },
-    change: function (args) { UtilityMethods.prototype.changeFields(args) },
+    change: function (args) { UtilityMethods.prototype.modifyNodeTemplate(args) },
 });
 fieldsList.appendTo('#fieldsDropdown');
 
@@ -677,7 +680,7 @@ var exportDialog = new ej.popups.Dialog({
      '<input type="text" id="exportRegion"/></div></div></div></div>'
 });
 exportDialog.appendTo('#exportDialog');
-
+// Initialize the export format dropdown. eg- PNG, SVG.
 var exportFormat = new ej.dropdowns.DropDownList({
     dataSource:DropDownDataSources.prototype.fileFormats(),
     fields: { text: 'text', value: 'value' },
@@ -763,7 +766,7 @@ var uploadObj = new ej.inputs.Uploader({
     showFileList:false
 });
 uploadObj.appendTo('#fileupload');
-
+// Triggers when the JSON file is uploaded successfully. 
 function onUploadSuccess(args) {
     var file1 = args.file;
     var file = file1.rawFile;
@@ -788,6 +791,7 @@ var pictureUploadObj = new ej.inputs.Uploader({
     showFileList:false
 });
 pictureUploadObj.appendTo('#pictureUpload');
+// Triggers when the image is uploaded successfully.
 function onPictureUploadSuccess(args){
     const file = args.file;
     const reader = new FileReader();
@@ -797,7 +801,7 @@ function onPictureUploadSuccess(args){
     };
     reader.readAsDataURL(file.rawFile);
 }
-
+// To apply the image's base64 value to the imageUrl of node data.
 function applyBase64AsImageUrl(base64String) {
     let selectedNode = diagram.selectedItems.nodes[0];
     selectedNode.data.ImageUrl = base64String;
@@ -805,7 +809,7 @@ function applyBase64AsImageUrl(base64String) {
     var imageTag = document.getElementById(selectedNode.id+'_picimage');
     imageTag.href.baseVal = base64String;
 }
-
+// Triggers before rendering menu item.
 function beforeItemRender(args) {
     var shortCutText = getShortCutKey(args.item.text);
     if (shortCutText) {
@@ -817,7 +821,7 @@ function beforeItemRender(args) {
         shortCutSpan.setAttribute('class', 'db-shortcut');
     }
 }
-
+// To render the shortcut keys for menu items.
 function getShortCutKey(menuItem) {
     var shortCutKey = navigator.platform.indexOf('Mac') > -1 ? 'Cmd' : 'Ctrl';
     switch (menuItem) {
@@ -836,6 +840,7 @@ function getShortCutKey(menuItem) {
     }
     return shortCutKey;
 }
+// To get Menu items for menubar.
     var menuItems = [
         {
             text: 'File',
@@ -851,9 +856,10 @@ function getShortCutKey(menuItem) {
         }
     ];
 
-    //Menu initialization
+    //Menu bar initialization
    var menubar =  new ej.navigations.Menu({ items: menuItems ,beforeItemRender:beforeItemRender,select:menuClick}, '#menu');
 
+   // To handle menu click.
    function menuClick (args)
     {
         var option = args.item.text;
@@ -933,7 +939,6 @@ function getShortCutKey(menuItem) {
         }
         diagram.dataBind();
     };
-
     var PaperSize = (function () {
         function PaperSize() {
         }

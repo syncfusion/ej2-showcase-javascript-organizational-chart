@@ -1,6 +1,7 @@
 var DiagramClientSideEvents = (function () {
     function DiagramClientSideEvents(){
     };
+    // Selection change event.
     DiagramClientSideEvents.prototype.selectionChange = function (args) {
         
             if(args.state === 'Changed'){
@@ -16,6 +17,7 @@ var DiagramClientSideEvents = (function () {
                 }
             }
     };
+    // To apply fill color to the selected node.
     DiagramClientSideEvents.prototype.applyFillColor = function (obj) {
         for (var i = 0; i < obj.length; i++) {
             if(obj[i] instanceof ej.diagrams.Node){
@@ -25,6 +27,7 @@ var DiagramClientSideEvents = (function () {
         }
         diagram.dataBind();
     };
+    // To remove fill color of selected node.
     DiagramClientSideEvents.prototype.removeFillColor = function (obj) {
         for (var i = 0; i < obj.length; i++) {
             if(obj[i] instanceof ej.diagrams.Node){
@@ -34,6 +37,7 @@ var DiagramClientSideEvents = (function () {
         }
         diagram.dataBind();
     };
+    // To execute userhandle click.
     DiagramClientSideEvents.prototype.onUserHandleMouseDown = function (args) {
         let option = args.element.name;
         switch(option){
@@ -58,9 +62,9 @@ var DiagramClientSideEvents = (function () {
         let assistantBtn = document.getElementById('addAssistantBtn');
         assistantBtn.style.cssText = 'pointer-events: auto !important; opacity:1; font-size:10px';
         if(fieldsList.value.length > 0){
-            let tbItems = document.getElementsByClassName('item-singleSelect');
-            for (var i = 0; i < tbItems.length; i++) {
-                tbItems[i].style.cssText = 'pointer-events: auto !important; opacity:1';
+            let labelStyleItems = document.getElementsByClassName('item-singleSelect');
+            for (var i = 0; i < labelStyleItems.length; i++) {
+                labelStyleItems[i].style.cssText = 'pointer-events: auto !important; opacity:1';
             }
         }
         let colorItems = document.getElementsByClassName('item-singleSelectColor');
@@ -74,15 +78,16 @@ var DiagramClientSideEvents = (function () {
         pictureDropdown.style.cssText = 'pointer-events: none !important; opacity:0.5';
         let assistantBtn = document.getElementById('addAssistantBtn');
         assistantBtn.style.cssText = 'pointer-events: none !important; opacity:0.5; font-size:10px';
-        let tbItems = document.getElementsByClassName('item-singleSelect');
-        for (var i = 0; i < tbItems.length; i++) {
-            tbItems[i].style.cssText = 'pointer-events: none !important; opacity:0.5';
+        let labelStyleItems = document.getElementsByClassName('item-singleSelect');
+        for (var i = 0; i < labelStyleItems.length; i++) {
+            labelStyleItems[i].style.cssText = 'pointer-events: none !important; opacity:0.5';
         }
         let colorItems = document.getElementsByClassName('item-singleSelectColor');
         for(var i = 0; i < colorItems.length; i++){
             colorItems[i].style.cssText = 'pointer-events: none !important; opacity:0.5';
         }
     };
+    // To add child to the selected node.
     DiagramClientSideEvents.prototype.addChild = function (args) {
         if(diagram.selectedItems.nodes.length > 0){
             let data = diagram.dataSourceSettings.dataSource.dataSource.json;
@@ -109,6 +114,7 @@ var DiagramClientSideEvents = (function () {
             diagram.doLayout();
         }
     };
+    // To append the values of selected node in the respective text boxed and to open the editNode dialog box.
     DiagramClientSideEvents.prototype.editFields = function (args) {
         let editBox = document.getElementById('editNodeDialog').ej2_instances[0];
         let name = document.getElementById('nodeName');
