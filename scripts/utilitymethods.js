@@ -404,18 +404,32 @@ var UtilityMethods = (function () {
     // To print the diagram.
     UtilityMethods.prototype.btnPrintClick = function () {
         let options = {};
+        var hOffset = diagram.scrollSettings.horizontalOffset;
+        var vOffset = diagram.scrollSettings.verticalOffset;
+        localStorage.setItem('print',diagram.saveDiagram());
+        diagram.loadDiagram(localStorage.getItem('print'));
         options.region = document.getElementById("printRegionDropdown").ej2_instances[0].value;
-        options.multiplePage = document.getElementById("printScaleToFit").ej2_instances[0].checked;
+        options.multiplePage = !document.getElementById("printScaleToFit").ej2_instances[0].checked;
         diagram.print(options);
+        diagram.scrollSettings.horizontalOffset = hOffset;
+        diagram.scrollSettings.verticalOffset = vOffset;
+        diagram.dataBind();
         printDialog.hide();
     };
     // To export the diagram.
     UtilityMethods.prototype.btnExportClick = function () {
+        var hOffset = diagram.scrollSettings.horizontalOffset;
+        var vOffset = diagram.scrollSettings.verticalOffset;
+        localStorage.setItem('export',diagram.saveDiagram());
+        diagram.loadDiagram(localStorage.getItem('export'));
         diagram.exportDiagram({
             fileName: document.getElementById("exportfileName").value,
             format: document.getElementById("exportFormat").value,
             mode:'Download'
         });
+        diagram.scrollSettings.horizontalOffset = hOffset;
+        diagram.scrollSettings.verticalOffset = vOffset;
+        diagram.dataBind();
         exportDialog.hide();
     };
      // To download diagram json.

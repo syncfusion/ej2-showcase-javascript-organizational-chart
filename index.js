@@ -725,7 +725,10 @@ printRegionDropdown.appendTo('#printRegionDropdown');
 
 // checkbox template for printDialog control
 var printMultiplePage = new ej.buttons.CheckBox({ label: 'Scale to fit 1 page', checked: true,
-change: function (args) {multiplePage(args); }
+change: function (args) {
+    diagram.pageSettings.multiplePage = !args.checked;
+    diagram.dataBind();
+ }
 });
 printMultiplePage.appendTo('#printScaleToFit');
 
