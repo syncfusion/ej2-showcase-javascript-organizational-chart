@@ -14,7 +14,7 @@ var UtilityMethods = (function () {
                 document.getElementsByClassName('e-file-select-wrap')[0].querySelector('button').click();
                 break;
             case 'Print Diagram':
-                printDialog.show();
+                this.btnPrintClick();
                 break;
             case 'Export Diagram':
                 exportDialog.show();
@@ -266,12 +266,6 @@ var UtilityMethods = (function () {
                     click: this.btnExportClick.bind(this), buttonModel: { content: 'Export', cssClass: 'e-flat e-db-primary', isPrimary: true }
                 });
                 break;
-            case 'print':
-                buttons.push({
-                    click: this.btnPrintClick.bind(this),
-                    buttonModel: { content: 'Print', cssClass: 'e-flat e-db-primary', isPrimary: true }
-                });
-                break;
             case 'editNode':
                 buttons.push({
                     click: this.btnEditNodeClick.bind(this),
@@ -351,9 +345,6 @@ var UtilityMethods = (function () {
             case 'exportDialog':
                 exportDialog.hide();
                 break;
-            case 'printDialog':
-                printDialog.hide();
-                break;
             case 'editNodeDialog':
                 editNodeDialog.hide();
                 break;
@@ -403,23 +394,26 @@ var UtilityMethods = (function () {
     };
     // To print the diagram.
     UtilityMethods.prototype.btnPrintClick = function () {
-        let options = {};
+        let options = {region:'Content'};
         var hOffset = diagram.scrollSettings.horizontalOffset;
         var vOffset = diagram.scrollSettings.verticalOffset;
+        var zoom = diagram.scrollSettings.currentZoom;
         localStorage.setItem('print',diagram.saveDiagram());
         diagram.loadDiagram(localStorage.getItem('print'));
-        options.region = document.getElementById("printRegionDropdown").ej2_instances[0].value;
-        options.multiplePage = !document.getElementById("printScaleToFit").ej2_instances[0].checked;
         diagram.print(options);
-        diagram.scrollSettings.horizontalOffset = hOffset;
-        diagram.scrollSettings.verticalOffset = vOffset;
+        if(zoom <= 0.45){
+            diagram.fitToPage({mode:'Page',region:'Content'});
+        }else{
+            diagram.scrollSettings.horizontalOffset = hOffset;
+            diagram.scrollSettings.verticalOffset = vOffset;
+        }
         diagram.dataBind();
-        printDialog.hide();
     };
     // To export the diagram.
     UtilityMethods.prototype.btnExportClick = function () {
         var hOffset = diagram.scrollSettings.horizontalOffset;
         var vOffset = diagram.scrollSettings.verticalOffset;
+        var zoom = diagram.scrollSettings.currentZoom;
         localStorage.setItem('export',diagram.saveDiagram());
         diagram.loadDiagram(localStorage.getItem('export'));
         diagram.exportDiagram({
@@ -427,8 +421,12 @@ var UtilityMethods = (function () {
             format: document.getElementById("exportFormat").value,
             mode:'Download'
         });
-        diagram.scrollSettings.horizontalOffset = hOffset;
-        diagram.scrollSettings.verticalOffset = vOffset;
+        if(zoom <= 0.45){
+            diagram.fitToPage({mode:'Page',region:'Content'});
+        }else{
+            diagram.scrollSettings.horizontalOffset = hOffset;
+            diagram.scrollSettings.verticalOffset = vOffset;
+        }
         diagram.dataBind();
         exportDialog.hide();
     };
