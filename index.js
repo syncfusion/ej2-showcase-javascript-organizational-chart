@@ -696,41 +696,6 @@ var exportRegion = new ej.dropdowns.DropDownList({
 });
 exportRegion.appendTo('#exportRegion');
 
-// Print dialog
-var printDialog = new ej.popups.Dialog({
-    width: '335px',
-    header: 'Print Diagram',
-    target: document.body,
-    isModal: true,
-    animationSettings: { effect: 'None' },
-    buttons: UtilityMethods.prototype.getDialogButtons('print'),
-    visible: false,
-    showCloseIcon: true,
-    content: '<div id="printDialogContent">' +
-    '<div class="row"><div class="row">Region</div> <div class="row db-dialog-child-prop-row">' +
-    '<input type="text" id="printRegionDropdown"/> </div> </div>' +
-    '<div class="row db-dialog-prop-row" style="margin-top: 16px"> <input id="printScaleToFit" type="checkbox" /></div>' +
-    '</div>'
-
-});
-printDialog.appendTo('#printDialog');
-
-// dropdown template for printDialog control
-var printRegionDropdown = new ej.dropdowns.DropDownList({
-    dataSource:DropDownDataSources.prototype.diagramRegions(),
-    fields: { text: 'text', value: 'value' },
-    index: 0,
-});
-printRegionDropdown.appendTo('#printRegionDropdown');
-
-// checkbox template for printDialog control
-var printMultiplePage = new ej.buttons.CheckBox({ label: 'Scale to fit 1 page', checked: true,
-change: function (args) {
-    diagram.pageSettings.multiplePage = !args.checked;
-    diagram.dataBind();
- }
-});
-printMultiplePage.appendTo('#printScaleToFit');
 
 // Initialize the search dialog component.
 var searchDialog = new ej.popups.Dialog({
@@ -750,7 +715,7 @@ var searchDialog = new ej.popups.Dialog({
 });
 searchDialog.appendTo('#searchDialog');
 
-// dropdown template for printDialog control
+// dropdown template for search dialog
 var searchDropDown = new ej.dropdowns.DropDownList({
     dataSource:DropDownDataSources.prototype.searchDropDownItems(),
     fields: { text: 'text', value: 'value' },
@@ -876,7 +841,7 @@ function getShortCutKey(menuItem) {
                 UtilityMethods.prototype.download(diagram.saveDiagram());
                 break;
             case 'Print':
-                printDialog.show();
+                UtilityMethods.prototype.btnPrintClick();
                 break;
             case 'Export':
                 exportDialog.show();
