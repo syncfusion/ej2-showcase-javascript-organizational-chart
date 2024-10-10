@@ -727,8 +727,8 @@ searchDropDown.appendTo('#searchDropDown');
 // Iniatilize the uploader component.
 var uploadObj = new ej.inputs.Uploader({
     asyncSettings: {
-        saveUrl: 'https://aspnetmvc.syncfusion.com/services/api/uploadbox/Save',
-        removeUrl: 'https://aspnetmvc.syncfusion.com/services/api/uploadbox/Remove'
+       saveUrl: 'https://services.syncfusion.com/js/production/api/FileUploader/Save',
+       removeUrl: 'https://services.syncfusion.com/js/production/api/FileUploader/Remove'
     },
     success: onUploadSuccess,
     showFileList:false
@@ -752,8 +752,8 @@ function loadDiagram(event) {
 
 var pictureUploadObj = new ej.inputs.Uploader({
     asyncSettings: {
-        saveUrl: 'https://aspnetmvc.syncfusion.com/services/api/uploadbox/Save',
-        removeUrl: 'https://aspnetmvc.syncfusion.com/services/api/uploadbox/Remove'
+        saveUrl: 'https://services.syncfusion.com/js/production/api/FileUploader/Save',
+        removeUrl: 'https://services.syncfusion.com/js/production/api/FileUploader/Remove'
     },
     success: onPictureUploadSuccess,
     showFileList:false
